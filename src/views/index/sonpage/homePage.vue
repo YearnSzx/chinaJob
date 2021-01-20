@@ -26,7 +26,7 @@
             >
               <div class="RMBox_sBox_top">
                 <p>{{item.orrePosition}}</p>
-                <span>{{item.orreExpectedSalaryBottom}}--{{item.orreExpectedSalaryTop}}</span>
+                <span>¥{{item.orreExpectedSalaryBottom}}--{{item.orreExpectedSalaryTop}}</span>
               </div>
               <div class="RMBox_sBox_bot">
                 <div>
@@ -63,7 +63,7 @@
                 <p>{{tData.tName}}:{{item.ftapTeacherName}}</p>
                 <span>{{tData.tCountry}}:{{item.ftapCountry}}</span>
                 <p>{{tData.hopePay}}:</p>
-                <p>{{item.ftapExpectedSalaryBottom}}-{{item.ftapExpectedSalaryTop}}</p>
+                <p>¥{{item.ftapExpectedSalaryBottom}}-{{item.ftapExpectedSalaryTop}}</p>
               </div>
             </li>
           </ul>
@@ -84,7 +84,7 @@
                 <p>{{tData.tName}}:{{item.ftapTeacherName}}</p>
                 <span>{{tData.tCountry}}:{{item.ftapCountry}}</span>
                 <p>{{tData.hopePay}}:</p>
-                <p>{{item.ftapExpectedSalaryBottom}}-{{item.ftapExpectedSalaryTop}}</p>
+                <p>¥{{item.ftapExpectedSalaryBottom}}-{{item.ftapExpectedSalaryTop}}</p>
               </div>
             </li>
           </ul>
@@ -168,7 +168,7 @@ export default {
   },
   created(){
     userMessageList().then(res=>{
-      // console.log(res)
+      console.log(res)
     })
     // 控制中英文的数据
     this.changeCNorEN2 = sessionStorage.getItem('changeChinese')
@@ -344,23 +344,23 @@ img {
 }
 
 .RMBox_sBox_top{
-  padding: 40px;
-  padding-top: 15px;
-  padding-bottom: 15px;
+  padding: 37px;
+  padding-top: 36px;
+  padding-bottom: 36px;
 }
 .RMBox_sBox_top>p{
   width: 100%;
-  font-size: 26px;
+  font-size: 14px;
   color: #0E0E0E;
-  min-height: 35px;
+  /* min-height: 35px; */
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 .RMBox_sBox_top>span{
-  font-size: 40px;
+  font-size: 24px;
   color: #0E0E0E;
-  margin-top: 40px;
+  margin-top: 38px;
   display: block;
   font-family: PingFangSC-Semibold;
 }
@@ -369,18 +369,18 @@ img {
   padding-top: 0;
 }
 .RMBox_sBox_bot>div{
-  padding-left: 28px;
-  padding-top: 13px;
+  padding-left: 25px;
+  padding-top: 15px;
   border-top: 1px solid #DADADA;
 }
 .greyBlock{
-  width: 44px;
-  height: 44px;
+  width: 38px;
+  height: 38px;
   background: #DADADA;
   vertical-align: middle;
 }
 .RMBox_sBox_bot>div>p{
-  font-size: 24px;
+  font-size: 14px;
   vertical-align: middle;
   padding-left: 18px;
 }

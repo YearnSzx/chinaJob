@@ -69,7 +69,7 @@
               <p>{{tData.tName}}:{{item.ftapTeacherName}}</p>
               <span>{{tData.tCountry}}:{{item.ftapCountry}}</span>
               <p>{{tData.hopePay}}:</p>
-              <p>{{item.ftapExpectedSalaryBottom}}--{{item.ftapExpectedSalaryTop}}</p>
+              <p>¥{{item.ftapExpectedSalaryBottom}}--{{item.ftapExpectedSalaryTop}}</p>
             </div>
         </li>
         </ul>

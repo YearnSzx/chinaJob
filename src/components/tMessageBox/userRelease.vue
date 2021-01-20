@@ -24,7 +24,7 @@
                       <el-radio label="2">{{female}}</el-radio>
                     </el-radio-group>
                   </el-form-item>
-                  <el-form-item prop="birthday">
+                  <el-form-item prop="BirthDate">
                     <div class="msgContentTitle1 must"> {{ mTitle.BirthDate}} </div>
                     <el-date-picker
                       v-model="form.BirthDate"
@@ -35,7 +35,7 @@
                       >
                     </el-date-picker>
                   </el-form-item>
-                  <el-form-item prop="country">
+                  <el-form-item prop="Nationality">
                     <div class="msgContentTitle1 must"> {{ mTitle.Nationality}} </div>
                     <!-- <el-input v-model="form.Nationality"></el-input> b89 mn -->
                     <el-select v-model="form.Nationality" :placeholder="mTitle.choice" filterable>
@@ -117,7 +117,7 @@
                   </el-form-item>
 
                   <el-form-item prop="selfItd">
-                    <div class="msgContentTitle1"> {{ mTitle.selfItd}} </div>
+                    <div class="msgContentTitle1 must"> {{ mTitle.selfItd}} </div>
                     <el-input 
                       type="textarea" 
                       v-model="form.selfItd"
@@ -201,7 +201,7 @@ export default {
           {  required: true, message: 'Please enter your gender', trigger: 'change' }
         ],
         BirthDate: [
-          { type: 'date', required: true, message: 'Please enter your birth date', trigger: 'change' }
+          { required: true, message: 'Please enter your birth date', trigger: 'change' }
         ],
         Nationality: [
           { required: true, message: 'Please enter your nationality', trigger: 'change' }
@@ -226,13 +226,16 @@ export default {
         ],
         workVisa: [
           { required: true, message: 'Please select your work visa status', trigger: 'change' }
+        ],
+        selfItd: [
+          { required: true, message: 'Please fill in your profile', trigger: 'change' }
         ]
       },
       qualifications:[
         {value:'junior college',label:'大专'},
-        {value:'undergraduate',label:'本科'},
-        {value:'jgraduate student',label:'研究生'},
-        {value:'doctor',label:'博士'},
+        {value:'Undergraduate',label:'本科'},
+        {value:'Master',label:'研究生'},
+        {value:'Doctor',label:'博士'},
       ],
       mTitle:{
         CandidatesInformation:'',
@@ -304,7 +307,7 @@ export default {
         nowLocation:'Current Location',
         workplace:'Working expectation',
         ChineseStandard:'Chinese Standard',
-        education:'Educcation Background',
+        education:'Education Background',
         hopePay:'Salary Expectation',
         workVisa:'Work visa conditions',
         workExp:'Working experience',
@@ -320,13 +323,13 @@ export default {
         ChineseStanGood:'Good',
 
         juniorCollege:'junior college',
-        undergraduate:'undergraduate',
-        graduateStudent:'graduate student',
-        doctor:'doctor',
+        undergraduate:'Undergraduate',
+        graduateStudent:'Master',
+        doctor:'Doctor',
 
         haveVisa:'I’m holding a work visa',
         filesComplete:'All documents are complete',
-        noVisa:'cannot apply for work visa',
+        noVisa:'Cannot apply for work visa',
         choice:'Please select'
       }
       // this.text.details = 'Job details'
@@ -372,21 +375,21 @@ export default {
   methods:{
      submitForm(formName) {
         this.$refs[formName].validate((valid) => {
+          if (!valid) {
+            this.$notify({
+                title: 'failed',
+                message: 'Any required items are blank',
+                type: 'error'
+            });
+            return false
+          }
           if (this.imageFileList == '') {
             valid =false
-            if(sessionStorage.getItem('changeChinese')=='false'){
-              this.$notify({
-                  title: 'failed',
-                  message: 'Please add a picture',
-                  type: 'error'
-              });
-            }else{
-              this.$notify({
-                title: '上传失败',
-                message: '请添加头像',
+            this.$notify({
+                title: 'failed',
+                message: 'Please add a picture',
                 type: 'error'
-              });
-            }
+            });
             return false
           }
           // headerUserImg
@@ -569,7 +572,7 @@ export default {
             nowLocation:'Current Location',
             workplace:'Working expectation',
             ChineseStandard:'Chinese Standard',
-            education:'Educcation Background',
+            education:'Education Background',
             hopePay:'Salary Expectation',
             workVisa:'Work visa conditions',
             workExp:'Working experience',
@@ -584,12 +587,12 @@ export default {
             ChineseStanNormal:'Normal',
             ChineseStanGood:'Good',
             juniorCollege:'junior college',
-            undergraduate:'undergraduate',
-            graduateStudent:'graduate student',
-            doctor:'doctor',
+            undergraduate:'Undergraduate',
+            graduateStudent:'Master',
+            doctor:'Doctor',
             haveVisa:'I’m holding a work visa',
             filesComplete:'All documents are complete',
-            noVisa:'cannot apply for work visa',
+            noVisa:'Cannot apply for work visa',
 
             choice:'Please select'
           }

@@ -49,7 +49,7 @@
             <div class="userMsg" @click="goToJigouMessage(item.orreId)">
               <div>
                 <p>{{item.orrePosition}}</p>
-                <p>{{Salary}}：{{item.orreExpectedSalaryBottom}}-{{item.orreExpectedSalaryTop}}</p>
+                <p>{{Salary}}：¥{{item.orreExpectedSalaryBottom}}-{{item.orreExpectedSalaryTop}}</p>
                 <p>{{WorkingCity}}：{{item.orreWorkAddress}}</p>
                 <!-- <p>{{item.orreOrgNameEn}}</p> -->
 

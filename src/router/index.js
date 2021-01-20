@@ -73,12 +73,10 @@ router.beforeEach((to, from, next) => {
   if (to.name === 'HomePage' || to.path === '/findJob' || to.path === '/findTeach' || to.path === '/jigouJieShao' || to.path === '/teachJieShao' || to.path === '/whiteHouse') {
     next();
   } else {
-    console.log('进来了')
     let token = sessionStorage.getItem('userId')
     if (token == 'null' || token === '' || token == null) {
       next('/');
     } else {
-      console.log('进来了222')
       next();
     }
   }

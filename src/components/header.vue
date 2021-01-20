@@ -248,15 +248,15 @@ export default {
       // let uid = {
       //     ftapUserId:sessionStorage.getItem('userId')
       //   }
-        userMessageList2(Number(sessionStorage.getItem('userId'))).then(res=>{
-          // userHeadImg 头像地址
-          // console.log(res)
-          if (res.data.root[0].userHeadImg == 'null' || res.data.root[0].userHeadImg == null || res.data.root[0].userHeadImg == '' ) {
-            this.userImgUrl = require("@/assets/logo.png");
-          }else{
-            this.userImgUrl = res.data.root[0].userHeadImg
-          }
-        })
+      userMessageList2(Number(sessionStorage.getItem('userId'))).then(res=>{
+        // userHeadImg 头像地址
+        console.log(res)
+        if (res.data.root[0].userHeadImg == 'null' || res.data.root[0].userHeadImg == null || res.data.root[0].userHeadImg == '' ) {
+          this.userImgUrl = require("@/assets/logo.png");
+        }else{
+          this.userImgUrl = res.data.root[0].userHeadImg
+        }
+      })
       // if (sessionStorage.getItem('userShow') == '1') {
       //   let uid = {
       //     ftapUserId:sessionStorage.getItem('userId')
@@ -301,7 +301,7 @@ export default {
             userWork:'Job details',
             userRelease : 'Post job',
             userSetting : 'Settings',
-            loginOut : 'OutLogin'
+            loginOut : 'Log out'
           }
         }else{
           this.messageBoxData = {
@@ -323,7 +323,7 @@ export default {
             userWork:'Job details',
             userRelease : 'Recruit',
             userSetting : 'Settings',
-            loginOut : 'OutLogin'
+            loginOut : 'Log out'
           }
         }else{
           this.messageBoxData = {
@@ -532,7 +532,7 @@ export default {
             userWork:'Job details',
             userRelease : 'Post job',
             userSetting : 'Settings',
-            loginOut : 'OutLogin'
+            loginOut : 'Log out'
           }
         }else{
           this.messageBoxData = {
@@ -555,7 +555,7 @@ export default {
             userWork:'Job details',
             userRelease : 'Recruit',
             userSetting : 'Settings',
-            loginOut : 'OutLogin'
+            loginOut : 'Log out'
           }
         }else{
           this.messageBoxData = {
@@ -625,7 +625,7 @@ export default {
                     userWork:'Job details',
                     userRelease : 'Post job',
                     userSetting : 'Settings',
-                    loginOut : 'OutLogin'
+                    loginOut : 'Log out'
                   }
                   
                   this.messageBoxDataPath = {
@@ -639,7 +639,7 @@ export default {
                     userWork:'Job details',
                     userRelease : 'Recruit',
                     userSetting : 'Settings',
-                    loginOut : 'OutLogin'
+                    loginOut : 'Log out'
                   }
 
                   this.messageBoxDataPath = {
@@ -821,11 +821,6 @@ header {
 .user{
   text-align: right;
 }
-/* .user>div{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-} */
 
 /* 以下是登陆成功之后的 */
 .userImgAndName {
@@ -885,6 +880,20 @@ header {
 .tSetting>ul>li>a{
   color: #717171;
   font-size: 18px;
+}
+.tSetting2>ul>li>a{
+  font-size: 16px;
+}
+.signOut>button{
+  font-size: 18px;
+  border: none;
+  background: none;
+  color: #717171;
+  cursor: pointer;
+  outline: none;
+}
+.tSetting2 .signOut>button{
+  font-size: 16px;
 }
 .tSetting>ul>li>p{
   color: #717171;
@@ -991,14 +1000,7 @@ header {
 .headerEn>ul>li>a{
   letter-spacing: 0;
 }
-.signOut>button{
-  font-size: 18px;
-  border: none;
-  background: none;
-  color: #717171;
-  cursor: pointer;
-  outline: none;
-}
+
 [class*=el-col-]{
     float: none;
 }

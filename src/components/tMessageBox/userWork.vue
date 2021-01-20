@@ -106,14 +106,14 @@ export default {
     }
     // console.log(data)
     ftApplyList(data).then((res)=>{
-      // console.log(res.data.root)
+      console.log(res)
       this.jobWanted = res.data.root
       if (this.jobWanted.length == 0) {
         this.noData = true
       }
     })
     userMessageList2(Number(sessionStorage.getItem('userId'))).then(res=>{
-      // console.log(res.data.root[0])
+      console.log(res)
       let data = {
         userRealName:res.data.root[0].userRealName,
         userHeadImg:res.data.root[0].userHeadImg

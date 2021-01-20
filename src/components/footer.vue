@@ -13,7 +13,8 @@
     <div class="midLine"></div>
     <div class="footer">
         <p class="f1">
-        友情链接： <a href="https://www.ketabc.com/ktabc-off/index.html" target="_blank">客厅ABC</a>&nbsp;
+        <span>友情链接：</span>
+         <a href="https://www.ketabc.com/ktabc-off/index.html" target="_blank">客厅ABC</a>&nbsp;
                   <a href="https://www.jiemodui.com/" target="_blank">芥末堆</a>&nbsp;
                   <a href="http://www.duozhi.com/" target="_blank">多知网</a>&nbsp;
                   <a href="http://www.tesoltraining.co.uk/" target="_blank">TESOL</a>&nbsp;
@@ -55,13 +56,14 @@ export default {
   margin-bottom: 14px;
   color: #858484;
 }
-.f1 >a{
-  font-size: 16px;
+.f1>a{
+  font-size: 12px;
   color: #858484;
 }
 .f2 {
   font-size: 18px;
   margin-bottom: 14px;
+  color: #CECECE;
 }
 .f3 {
   font-size: 12px;

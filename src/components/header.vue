@@ -1,7 +1,7 @@
 <!--  -->
 <template>
   <div>
-    <header :class="{active:bgShow == 1}">
+    <header :class="{ active: bgShow == 1 }">
       <el-row>
         <el-col :span="18" :offset="4">
           <div class="header">
@@ -11,77 +11,120 @@
                   <img :src="logoImgUrl" class="logo" alt="" @click="goHome" />
                 </div>
               </el-col>
-                
-              <el-col :span="9" :class="{headerEn:dhEN == true}">
-                  <el-menu
-                      :default-active="activeIndex"
-                      class="el-menu-demo"
-                      mode="horizontal"
-                      @select="handleSelect"
-                  >
-                      <el-menu-item index="1">
-                        <router-link to="/" v-model="headerTitle.homePage" class="routerLink">{{headerTitle.homePage}}</router-link>
-                      </el-menu-item>
-                      <el-menu-item index="2">
-                        <router-link to="/findJob" class="routerLink">{{headerTitle.findJob}}</router-link>
-                      </el-menu-item>
-                      <el-menu-item index="3">
-                        <router-link to="/findTeach" class="routerLink">{{headerTitle.findTeach}}</router-link>
-                      </el-menu-item>
-                  </el-menu>
+
+              <el-col :span="9" :class="{ headerEn: dhEN == true }">
+                <el-menu
+                  :default-active="activeIndex"
+                  class="el-menu-demo"
+                  mode="horizontal"
+                  @select="handleSelect"
+                >
+                  <el-menu-item index="1">
+                    <router-link
+                      to="/"
+                      v-model="headerTitle.homePage"
+                      class="routerLink"
+                      >{{ headerTitle.homePage }}</router-link
+                    >
+                  </el-menu-item>
+                  <el-menu-item index="2">
+                    <router-link to="/findJob" class="routerLink">{{
+                      headerTitle.findJob
+                    }}</router-link>
+                  </el-menu-item>
+                  <el-menu-item index="3">
+                    <router-link to="/findTeach" class="routerLink">{{
+                      headerTitle.findTeach
+                    }}</router-link>
+                  </el-menu-item>
+                </el-menu>
               </el-col>
-              
+
               <el-col :span="CNorEN()">
-                  <!-- 用户操作部分 -->
+                <!-- 用户操作部分 -->
                 <div class="user">
                   <div>
-                    <div class="changeLanguage" :class="{changeLanguage2:changeEngAndChina == 'false'}">
+                    <div
+                      class="changeLanguage"
+                      :class="{ changeLanguage2: changeEngAndChina == 'false' }"
+                    >
                       <div>
-                        <span @click="Chinese">{{headerTitle.chinese}}</span>
+                        <span @click="Chinese">{{ headerTitle.chinese }}</span>
                         <div class="CL_line"></div>
-                        <span @click="English">{{headerTitle.english}}</span>
+                        <span @click="English">{{ headerTitle.english }}</span>
                       </div>
                     </div>
-                    <div class="registerAndSignIn" :class="{registerAndSignIn2:changeEngAndChina == 'false'}" v-if="rAndSshow">
+                    <div
+                      class="registerAndSignIn"
+                      :class="{
+                        registerAndSignIn2: changeEngAndChina == 'false',
+                      }"
+                      v-if="rAndSshow"
+                    >
                       <div>
-                        <span class="showRegister" @click="showSignIn()">{{headerTitle.login}}</span>
+                        <span class="showRegister" @click="showSignIn()">{{
+                          headerTitle.login
+                        }}</span>
                         <div class="CL_line"></div>
-                        <span class="showRegister" @click="showReg()">{{headerTitle.register}}</span>
+                        <span class="showRegister" @click="showReg()">{{
+                          headerTitle.register
+                        }}</span>
                       </div>
                     </div>
                     <!-- v-if="signInSuccess" -->
                     <div class="userImgAndName" v-if="signInSuccess">
                       <div>
-                        <span>{{userName}}</span>
+                        <span>{{ userName }}</span>
                         <div class="userHeadImg">
-                            <img :src="userImgUrl" class="headImg" alt="" @mouseover="showMessageBox" @mouseout="outMessageBox(1)" />
-                            <!-- 信息设置 --> 
+                          <img
+                            :src="userImgUrl"
+                            class="headImg"
+                            alt=""
+                            @mouseover="showMessageBox"
+                            @mouseout="outMessageBox(1)"
+                          />
+                          <!-- 信息设置 -->
                         </div>
-                        <div class="informationSetting" v-show="messageBox" @mouseover="showMessageBox2" @mouseout="outMessageBox2">
+                        <div
+                          class="informationSetting"
+                          v-show="messageBox"
+                          @mouseover="showMessageBox2"
+                          @mouseout="outMessageBox2"
+                        >
                           <div class="sanjiao"></div>
-                          <div class="tSetting" :class="{tSetting2:changeEngAndChina == 'false'}">
+                          <div
+                            class="tSetting"
+                            :class="{ tSetting2: changeEngAndChina == 'false' }"
+                          >
                             <ul>
                               <li>
-                                <router-link :to="'/'+messageBoxDataPath.userWorkPage">
-                                  {{messageBoxData.userWork}}
+                                <router-link
+                                  :to="'/' + messageBoxDataPath.userWorkPage"
+                                >
+                                  {{ messageBoxData.userWork }}
                                   <!-- 求职 -->
                                 </router-link>
                               </li>
                               <li v-if="postMsg">
-                                <router-link :to="'/'+messageBoxDataPath.userReleasePage">
-                                  {{messageBoxData.userRelease}}
+                                <router-link
+                                  :to="'/' + messageBoxDataPath.userReleasePage"
+                                >
+                                  {{ messageBoxData.userRelease }}
                                 </router-link>
                               </li>
                               <li>
-                                <router-link :to="'/'+messageBoxDataPath.userSettingPage" @click="clearData">
-                                  {{messageBoxData.userSetting}}
+                                <router-link
+                                  :to="'/' + messageBoxDataPath.userSettingPage"
+                                  @click="clearData"
+                                >
+                                  {{ messageBoxData.userSetting }}
                                   <!-- 设置 -->
                                 </router-link>
                               </li>
                               <li class="signOut">
-                                <button @click="signout" :disabled="isDisable" >
+                                <button @click="signout" :disabled="isDisable">
                                   <!-- {{userSetting}} -->
-                                  {{messageBoxData.loginOut}}
+                                  {{ messageBoxData.loginOut }}
                                 </button>
                               </li>
                             </ul>
@@ -89,9 +132,7 @@
                           <div class="jigouSetting"></div>
                         </div>
                       </div>
-                      
                     </div>
-
                   </div>
                 </div>
               </el-col>
@@ -99,26 +140,40 @@
           </div>
         </el-col>
       </el-row>
-
     </header>
     <!-- 注册 -->
     <div class="register" v-if="regShow">
-      <register @toServiceA="toServiceAgrm" @registerSuccess="rSuccess"  @closeTc="close"></register>
+      <register
+        @toServiceA="toServiceAgrm"
+        @registerSuccess="rSuccess"
+        @closeTc="close"
+      ></register>
       <div class="registerBg" @click="showReg()"></div>
     </div>
     <!-- 登陆 -->
     <div class="signIn" v-if="singInShow">
-      <signIn @toRegister="goToReg" @toPsWd="toForgotPw" @signinSuccess="signSuccess" @closeTc="close"></signIn>
+      <signIn
+        @toRegister="goToReg"
+        @toPsWd="toForgotPw"
+        @signinSuccess="signSuccess"
+        @closeTc="close"
+      ></signIn>
       <div class="signInBg" @click="showSignIn()"></div>
     </div>
     <!-- 忘记密码 -->
     <div class="forgotPassWord" v-if="forgotPassWordShow">
-      <forgotPassWord @changePwdSuccess="forgotPwIn"  @closeTc="close"></forgotPassWord>
+      <forgotPassWord
+        @changePwdSuccess="forgotPwIn"
+        @closeTc="close"
+      ></forgotPassWord>
       <div class="forgotPwBg" @click="forgotPwIn()"></div>
     </div>
     <!-- 服务协议 -->
     <div class="ServiceAgreement" v-if="ServiceAgreementShow">
-      <serviceAgreement @toServiceA="toServiceAgrm"  @closeTc="close"></serviceAgreement>
+      <serviceAgreement
+        @toServiceA="toServiceAgrm"
+        @closeTc="close"
+      ></serviceAgreement>
       <div class="ServiceAgmBg" @click="ServiceAIn()"></div>
     </div>
   </div>
@@ -130,100 +185,100 @@ import signIn from './signIn.vue'
 import forgotPassWord from './forgotPassWord.vue'
 import serviceAgreement from './ServiceAgreement.vue'
 
-import {ftJobWanted,orreRecruit,signOut,login,userMessageList2,ftApplyList,orreRecruit4} from '@/utils/index'  
+import { ftJobWanted, orreRecruit, signOut, login, userMessageList2, ftApplyList, orreRecruit4 } from '@/utils/index'
 export default {
-  components:{register,signIn,forgotPassWord,serviceAgreement},
-  props:['changeHeadBg','changeHeadImg'],
+  components: { register, signIn, forgotPassWord, serviceAgreement },
+  props: ['changeHeadBg', 'changeHeadImg'],
   data() {
     return {
       // 显示header背景与否
-      bgShow:0,
+      bgShow: 0,
       activeIndex: "1",
       logoImgUrl: "",
       // 展示注册界面
-      regShow:false,
+      regShow: false,
       // 展示登陆界面  
-      singInShow:false,
+      singInShow: false,
       // 展示与否登录注册板块   
-      rAndSshow:true,
+      rAndSshow: true,
       // 忘记密码
-      forgotPassWordShow:false,
-      ServiceAgreementShow:false,
+      forgotPassWordShow: false,
+      ServiceAgreementShow: false,
       // 接收登陆页面传的值
-      toForgotPsw:'',
+      toForgotPsw: '',
       // 登陆成功
-      signInSuccess:false,
+      signInSuccess: false,
       // 头像
-      userImgUrl:'',
+      userImgUrl: '',
       // 用户
-      userName:'',
+      userName: '',
       // 判断登陆后是教师还是机构
-      show:'',
+      show: '',
       // 弹出框
-      messageBox:false,
-      messageBoxData:[],
-      postMsg:false,
+      messageBox: false,
+      messageBoxData: [],
+      postMsg: false,
       // 以下为点击之后弹出的页面
-      messageBoxDataPath:[],
+      messageBoxDataPath: [],
       // 是否进入弹出框
-      inMessageBox:false,
+      inMessageBox: false,
       // 头部专用中英文案
-      headerTitle:{
-        homePage:'首页',
-        findJob:'找工作',
-        findTeach:'找老师',
-        chinese:'中文',
-        english:'English',
-        login:'登录',
-        register:'注册',
+      headerTitle: {
+        homePage: '首页',
+        findJob: '找工作',
+        findTeach: '找老师',
+        chinese: '中文',
+        english: 'English',
+        login: '登录',
+        register: '注册',
       },
-      userid:'', //唯一标识
+      userid: '', //唯一标识
       // 设置一个控制中英文的数据
-      changeEngAndChina:true,
-      uimg:'',
-      isDisable:false,
+      changeEngAndChina: true,
+      uimg: '',
+      isDisable: false,
       // 英文状态下的导航
-      dhEN:false
+      dhEN: false
     };
   },
-  methods:{
-    clearData(){
+  methods: {
+    clearData() {
       // console.log(123)
     },
-    goHome(){
+    goHome() {
       if (this.$route.path != '/') {
-        this.$router.push({path:'/'})
+        this.$router.push({ path: '/' })
       }
     },
     handleSelect(key, keyPath) {
       // console.log(key, keyPath);
     },
-    showReg(){
+    showReg() {
       this.regShow = !this.regShow
     },
-    showSignIn(){
+    showSignIn() {
       this.singInShow = !this.singInShow
       // console.log(this.userName)
     },
     // 忘记密码
-    forgotPwIn(){
+    forgotPwIn() {
       this.forgotPassWordShow = !this.forgotPassWordShow
     },
     // 忘记密码出现
-    toForgotPw(){
+    toForgotPw() {
       this.singInShow = !this.singInShow
       this.forgotPassWordShow = !this.forgotPassWordShow
     },
     // 从登陆跳转到注册
-    goToReg(){
+    goToReg() {
       this.singInShow = !this.singInShow
       this.regShow = !this.regShow
     },
-    ServiceAIn(){
+    ServiceAIn() {
       this.ServiceAgreementShow = !this.ServiceAgreementShow
     },
     // 服务协议出现
-    toServiceAgrm(data){
+    toServiceAgrm(data) {
       // console.log(data)
       if (data.Checked) {
         this.$message('您已同意本服务协议,3秒后将跳转至注册界面');
@@ -231,143 +286,108 @@ export default {
           this.regShow = !this.regShow
           this.ServiceAgreementShow = !this.ServiceAgreementShow
         }, 2000);
-      }else{
+      } else {
         this.regShow = !this.regShow
         this.ServiceAgreementShow = !this.ServiceAgreementShow
       }
-      
+
     },
     // 登陆成功,头部更换
-    signSuccess(data){
+    signSuccess(data) {
       this.userid = data.userid
       // console.log(data)
-      sessionStorage.getItem('userHeadImg',data.userHeadImg)
+      sessionStorage.getItem('userHeadImg', data.userHeadImg)
       let uid = {
-        ftapUserId:data.userid
+        ftapUserId: data.userid
       }
-      // let uid = {
-      //     ftapUserId:sessionStorage.getItem('userId')
-      //   }
-      userMessageList2(Number(sessionStorage.getItem('userId'))).then(res=>{
+      userMessageList2(Number(sessionStorage.getItem('userId'))).then(res => {
         // userHeadImg 头像地址
         console.log(res)
-        if (res.data.root[0].userHeadImg == 'null' || res.data.root[0].userHeadImg == null || res.data.root[0].userHeadImg == '' ) {
+        if (res.data.root[0].userHeadImg == 'null' || res.data.root[0].userHeadImg == null || res.data.root[0].userHeadImg == '') {
           this.userImgUrl = require("@/assets/logo.png");
-        }else{
+        } else {
           this.userImgUrl = res.data.root[0].userHeadImg
         }
       })
-      // if (sessionStorage.getItem('userShow') == '1') {
-      //   let uid = {
-      //     ftapUserId:sessionStorage.getItem('userId')
-      //   }
-      //   userMessageList2(Number(sessionStorage.getItem('userId'))).then(res=>{
-      //     // userHeadImg 头像地址
-      //     console.log(res)
-      //     if (res.data.root[0].userHeadImg == 'null' || res.data.root[0].userHeadImg == null || res.data.root[0].userHeadImg == '' ) {
-      //       this.userImgUrl = require("@/assets/logo.png");
-      //     }else{
-      //       this.userImgUrl = res.data.root[0].userHeadImg
-      //     }
-      //   })
-      // }else{
-      //   let uid = {
-      //     orreUserId:Number(sessionStorage.getItem('userId'))
-      //   }
-      //   orreRecruit4(uid).then(res=>{
-      //     console.log(res.data.root)
-      //     if(res.data.root&&res.data.root.length>0){
-      //       let obj = res.data.root[0]
-      //       if(obj.orreLogo!==null&&obj.orreLogo!==''&&obj!==''){
-      //         this.userImgUrl =obj.orreLogo
-      //         console.log(obj)
-      //       }else{
-      //         this.userImgUrl = require("@/assets/logo.png");
-      //       }
-      //     }else{
-      //       this.userImgUrl = require("@/assets/logo22.png");
-      //     }
-      //   })
-      // }
 
-      sessionStorage.setItem('userId',data.userid)
+      sessionStorage.setItem('userId', data.userid)
       this.userName = data.name
       this.show = Number(sessionStorage.getItem("userShow"))
       // console.log(sessionStorage.getItem("changeChinese"))
-      if (this.show == 1 ) {
+      if (this.show == 1) {
         this.postMsg = false
-        if (sessionStorage.getItem("changeChinese")=='false') {
+        if (sessionStorage.getItem("changeChinese") == 'false') {
           this.messageBoxData = {
-            userWork:'Job details',
-            userRelease : 'Post job',
-            userSetting : 'Settings',
-            loginOut : 'Log out'
+            userWork: 'Job details',
+            userRelease: 'Post job',
+            userSetting: 'Settings',
+            loginOut: 'Log out'
           }
-        }else{
+        } else {
           this.messageBoxData = {
-            userWork:'求职',
-            userRelease : '发布求职',
-            userSetting : '设置',
-            loginOut : '退出登录'
+            userWork: '求职',
+            userRelease: '发布求职',
+            userSetting: '设置',
+            loginOut: '退出登录'
           }
         }
         this.messageBoxDataPath = {
-          userWorkPage : 'userWork',
-          userReleasePage : 'userRelease',
-          userSettingPage : 'userSetting'
+          userWorkPage: 'userWork',
+          userReleasePage: 'userRelease',
+          userSettingPage: 'userSetting'
         }
-      }else{
+      } else {
         this.postMsg = true
-        if (sessionStorage.getItem("changeChinese")=='false') {
+        if (sessionStorage.getItem("changeChinese") == 'false') {
           this.messageBoxData = {
-            userWork:'Job details',
-            userRelease : 'Recruit',
-            userSetting : 'Settings',
-            loginOut : 'Log out'
+            userWork: 'Job details',
+            userRelease: 'Recruit',
+            userSetting: 'Settings',
+            loginOut: 'Log out'
           }
-        }else{
+        } else {
           this.messageBoxData = {
-            userWork:'职位',
-            userRelease : '发布招聘',
-            userSetting : '设置',
-            loginOut : '退出登录'
+            userWork: '职位',
+            userRelease: '发布招聘',
+            userSetting: '设置',
+            loginOut: '退出登录'
           }
         }
         this.messageBoxDataPath = {
-          userWorkPage : 'JgUserWork',
-          userReleasePage : 'JgUserRelease',
-          userSettingPage : 'userSetting'
+          userWorkPage: 'JgUserWork',
+          userReleasePage: 'JgUserRelease',
+          userSettingPage: 'userSetting'
         }
       }
-      this.singInShow = !this.singInShow 
+      this.singInShow = !this.singInShow
       // 登陆注册隐藏
       this.rAndSshow = !this.rAndSshow
       // 用户出现
       this.signInSuccess = !this.signInSuccess
     },
     // 注册成功
-    rSuccess(){
+    rSuccess() {
       this.regShow = false
       this.singInShow = true
     },
-    signout:function(){
+    signout: function () {
       this.isDisable = true
       setTimeout(() => {
-      this.isDisable = false
+        this.isDisable = false
       }, 1000)
-      signOut().then((res)=>{
+      signOut().then((res) => {
         // console.log(res.data.success)
         this.userImgUrl = ''  //清空照片
         if (res.data.success) {
           this.activeIndex = '1'
           // console.log(this.activeIndex)
-          sessionStorage.setItem('userName','')
+          sessionStorage.setItem('userName', '')
           // 登陆注册出现
           this.rAndSshow = !this.rAndSshow
           // 用户隐藏
           this.signInSuccess = !this.signInSuccess
           if (this.$route.path != '/') {
-            this.$router.push({path:'/'})
+            this.$router.push({ path: '/' })
           }
           // 改变头部颜色
           this.bgShow = 0
@@ -384,87 +404,87 @@ export default {
           // localStorage.clear();
           sessionStorage.clear()
           // console.log(this.changeEngAndChina)
-          sessionStorage.setItem('changeChinese',this.changeEngAndChina)
-          sessionStorage.setItem('userHeadImg','')
+          sessionStorage.setItem('changeChinese', this.changeEngAndChina)
+          sessionStorage.setItem('userHeadImg', '')
         }
-        
+
       })
     },
-    showMessageBox2:function(){
+    showMessageBox2: function () {
       this.inMessageBox = true;
       this.messageBox = true
     },
-    outMessageBox2:function(){
+    outMessageBox2: function () {
       this.inMessageBox = false
       this.messageBox = false
     },
-    showMessageBox:function(){
+    showMessageBox: function () {
       this.messageBox = true
     },
-    outMessageBox:function(val){
+    outMessageBox: function (val) {
       if (val == 1) {
         // console.log(this.inMessageBox)
         setTimeout(() => {
           if (this.inMessageBox == false) {
             // console.log('消失')
             this.messageBox = false
-          }else{
+          } else {
             // console.log('出现')
             this.messageBox = true
           }
         }, 500);
       }
-      
+
     },
 
     // 转换为中文
-    Chinese:function(){
-      sessionStorage.setItem('changeChinese',true)
+    Chinese: function () {
+      sessionStorage.setItem('changeChinese', true)
       // console.log('切换为中文'+sessionStorage.getItem('changeChinese'))
       this.changeEngAndChina = sessionStorage.getItem('changeChinese')
       this.$emit("changeLanguage", this.changeEngAndChina)
     },
-    English:function(){
-      sessionStorage.setItem('changeChinese',false)
+    English: function () {
+      sessionStorage.setItem('changeChinese', false)
       // console.log('切换为英文'+sessionStorage.getItem('changeChinese'))
       this.changeEngAndChina = sessionStorage.getItem('changeChinese')
       this.$emit("changeLanguage", this.changeEngAndChina)
     },
-    updateData:function(){
+    updateData: function () {
       this.changeEngAndChina = sessionStorage.getItem('changeChinese')
     },
-    CNorEN:function(){
-      if (sessionStorage.getItem("changeChinese")=='false') {
+    CNorEN: function () {
+      if (sessionStorage.getItem("changeChinese") == 'false') {
         return 10
-      }else{
+      } else {
         return 8
       }
     },
-    close:function(){
-      this.regShow=false,
-      this.singInShow=false
-      this.forgotPassWordShow=false
-      this.ServiceAgreementShow=false
+    close: function () {
+      this.regShow = false,
+        this.singInShow = false
+      this.forgotPassWordShow = false
+      this.ServiceAgreementShow = false
     },
 
   },
   // created 初始化页面的时候监听本地有没有数据
   created() {
-    if(sessionStorage.getItem('bgshow')){
+    if (sessionStorage.getItem('bgshow')) {
       this.bgShow = 1
     }
     let urlTemp = "assets/chinajoblogo2.png";
     this.logoImgUrl = require("@/" + urlTemp);
     let uid = {
-      ftapUserId:sessionStorage.getItem('userId')
+      ftapUserId: sessionStorage.getItem('userId')
     }
-    userMessageList2(Number(sessionStorage.getItem('userId'))).then(res=>{
+    userMessageList2(Number(sessionStorage.getItem('userId'))).then(res => {
       // userHeadImg 头像地址
       // console.log(res)
       if (res.data.root != '' && res.data.root != []) {
-        if (res.data.root[0].userHeadImg == 'null' || res.data.root[0].userHeadImg == null || res.data.root[0].userHeadImg == '' ) {
+        if (res.data.root[0].userHeadImg == 'null' || res.data.root[0].userHeadImg == null || res.data.root[0].userHeadImg == '') {
           this.userImgUrl = require("@/assets/logo.png");
-        }else{
+        } else {
           this.userImgUrl = res.data.root[0].userHeadImg
         }
       }
@@ -476,13 +496,13 @@ export default {
     //   userMessageList2(Number(sessionStorage.getItem('userId'))).then(res=>{
     //     // userHeadImg 头像地址
     //     console.log(res)
-        
+
     //     if (res.data.root[0].userHeadImg == 'null' || res.data.root[0].userHeadImg == null || res.data.root[0].userHeadImg == '' ) {
     //       this.userImgUrl = require("@/assets/logo.png");
     //     }else{
     //       this.userImgUrl = res.data.root[0].userHeadImg
     //     }
-        
+
     //   })
     // }else{
     //   let uid = {
@@ -510,203 +530,203 @@ export default {
     //     }else{
     //       this.userImgUrl = require("@/assets/logo22.png");
     //     }
-        
+
     //   })
     // }
-    
+
 
     let userName = sessionStorage.getItem('userName')
     let userShow = sessionStorage.getItem('userShow')
-    if(userName && userShow){
+    if (userName && userShow) {
       // 登陆注册隐藏
       this.rAndSshow = !this.rAndSshow
       // 用户出现
       this.signInSuccess = !this.signInSuccess
       this.userName = userName
       this.show = userShow
-      
+
       if (this.show == 1) {
         this.postMsg = false
-        if (sessionStorage.getItem("changeChinese")=='false') {
+        if (sessionStorage.getItem("changeChinese") == 'false') {
           this.messageBoxData = {
-            userWork:'Job details',
-            userRelease : 'Post job',
-            userSetting : 'Settings',
-            loginOut : 'Log out'
+            userWork: 'Job details',
+            userRelease: 'Post job',
+            userSetting: 'Settings',
+            loginOut: 'Log out'
           }
-        }else{
+        } else {
           this.messageBoxData = {
-            userWork:'求职',
-            userRelease : '发布求职',
-            userSetting : '设置',
-            loginOut : '退出登录'
+            userWork: '求职',
+            userRelease: '发布求职',
+            userSetting: '设置',
+            loginOut: '退出登录'
           }
         }
         this.messageBoxDataPath = {
-          userWorkPage : 'userWork',
-          userReleasePage : 'userRelease',
-          userSettingPage : 'userSetting'
+          userWorkPage: 'userWork',
+          userReleasePage: 'userRelease',
+          userSettingPage: 'userSetting'
         }
-        
-      }else{
-        if (sessionStorage.getItem('changeChinese')=='false') {
+
+      } else {
+        if (sessionStorage.getItem('changeChinese') == 'false') {
           this.postMsg = true
           this.messageBoxData = {
-            userWork:'Job details',
-            userRelease : 'Recruit',
-            userSetting : 'Settings',
-            loginOut : 'Log out'
+            userWork: 'Job details',
+            userRelease: 'Recruit',
+            userSetting: 'Settings',
+            loginOut: 'Log out'
           }
-        }else{
+        } else {
           this.messageBoxData = {
-            userWork:'职位',
-            userRelease : '发布职位',
-            userSetting : '设置',
-            loginOut : '退出登录'
+            userWork: '职位',
+            userRelease: '发布职位',
+            userSetting: '设置',
+            loginOut: '退出登录'
           }
         }
 
         this.messageBoxDataPath = {
-          userWorkPage : 'JgUserWork',
-          userReleasePage : 'JgUserRelease',
-          userSettingPage : 'userSetting'
+          userWorkPage: 'JgUserWork',
+          userReleasePage: 'JgUserRelease',
+          userSettingPage: 'userSetting'
         }
       }
     }
     this.changeEngAndChina = sessionStorage.getItem('changeChinese')
     // 监测中英文切换
-    if (sessionStorage.getItem('changeChinese')=='false') {
+    if (sessionStorage.getItem('changeChinese') == 'false') {
       this.dhEN = true
       this.headerTitle = {
-        homePage:'Home',
-        findJob:'Jobs',
-        findTeach:'Teachers',
-        chinese:'Chinese',
-        english:'English',
-        login:'Login',
-        register:'Rigister',
+        homePage: 'Home',
+        findJob: 'Jobs',
+        findTeach: 'Teachers',
+        chinese: 'Chinese',
+        english: 'English',
+        login: 'Login',
+        register: 'Rigister',
       }
-    }else{
+    } else {
       this.dhEN = false
       this.headerTitle = {
-        homePage:'首页',
-        findJob:'找工作',
-        findTeach:'找老师',
-        chinese:'中文',
-        english:'English',
-        login:'登录',
-        register:'注册',
+        homePage: '首页',
+        findJob: '找工作',
+        findTeach: '找老师',
+        chinese: '中文',
+        english: 'English',
+        login: '登录',
+        register: '注册',
       }
     }
-    
+
   },
-  mounted(){
-    
+  mounted() {
+
   },
-  watch:{
-    changeEngAndChina :{
-        handler(newName, oldName) {
-            // console.log(newName,oldName) 
-            if (newName == 'false') {
-              this.dhEN = true
-              let headerText = {
-                  homePage:'Home',
-                  findJob:'Jobs',
-                  findTeach:'Teachers',
-                  chinese:'Chinese',
-                  english:'English',
-                  login:'Login',
-                  register:'Rigister',
-                }
-                this.headerTitle = headerText
-                if (this.show == 1) {
-                  this.postMsg = false
-                  this.messageBoxData = {
-                    userWork:'Job details',
-                    userRelease : 'Post job',
-                    userSetting : 'Settings',
-                    loginOut : 'Log out'
-                  }
-                  
-                  this.messageBoxDataPath = {
-                    userWorkPage : 'userWork',
-                    userReleasePage : 'userRelease',
-                    userSettingPage : 'userSetting'
-                  }
-                }else{
-                  this.postMsg = true
-                  this.messageBoxData = {
-                    userWork:'Job details',
-                    userRelease : 'Recruit',
-                    userSetting : 'Settings',
-                    loginOut : 'Log out'
-                  }
-
-                  this.messageBoxDataPath = {
-                    userWorkPage : 'JgUserWork',
-                    userReleasePage : 'JgUserRelease',
-                    userSettingPage : 'userSetting'
-                  }
-                }
-            }else{
-              this.dhEN = false
-              let headerText = {
-                  homePage:'首页',
-                  findJob:'找工作',
-                  findTeach:'找老师',
-                  chinese:'中文',
-                  english:'English',
-                  login:'登录',
-                  register:'注册',
-                }
-                this.headerTitle = headerText
-
-                if (this.show == 1) {
-                    this.postMsg = false
-                    this.messageBoxData = {
-                      userWork:'求职',
-                      userRelease : '发布求职',
-                      userSetting : '设置',
-                      loginOut : '退出登录'
-                    }
-                    
-                    this.messageBoxDataPath = {
-                      userWorkPage : 'userWork',
-                      userReleasePage : 'userRelease',
-                      userSettingPage : 'userSetting'
-                    }
-
-                }else{
-                    this.postMsg = true
-                    this.messageBoxData = {
-                      userWork:'职位',
-                      userRelease : '发布职位',
-                      userSetting : '设置',
-                      loginOut : '退出登录'
-                    }
-                    this.messageBoxDataPath = {
-                      userWorkPage : 'JgUserWork',
-                      userReleasePage : 'JgUserRelease',
-                      userSettingPage : 'userSetting'
-                    }
-                }
+  watch: {
+    changeEngAndChina: {
+      handler(newName, oldName) {
+        // console.log(newName,oldName) 
+        if (newName == 'false') {
+          this.dhEN = true
+          let headerText = {
+            homePage: 'Home',
+            findJob: 'Jobs',
+            findTeach: 'Teachers',
+            chinese: 'Chinese',
+            english: 'English',
+            login: 'Login',
+            register: 'Rigister',
+          }
+          this.headerTitle = headerText
+          if (this.show == 1) {
+            this.postMsg = false
+            this.messageBoxData = {
+              userWork: 'Job details',
+              userRelease: 'Post job',
+              userSetting: 'Settings',
+              loginOut: 'Log out'
             }
-        },
+
+            this.messageBoxDataPath = {
+              userWorkPage: 'userWork',
+              userReleasePage: 'userRelease',
+              userSettingPage: 'userSetting'
+            }
+          } else {
+            this.postMsg = true
+            this.messageBoxData = {
+              userWork: 'Job details',
+              userRelease: 'Recruit',
+              userSetting: 'Settings',
+              loginOut: 'Log out'
+            }
+
+            this.messageBoxDataPath = {
+              userWorkPage: 'JgUserWork',
+              userReleasePage: 'JgUserRelease',
+              userSettingPage: 'userSetting'
+            }
+          }
+        } else {
+          this.dhEN = false
+          let headerText = {
+            homePage: '首页',
+            findJob: '找工作',
+            findTeach: '找老师',
+            chinese: '中文',
+            english: 'English',
+            login: '登录',
+            register: '注册',
+          }
+          this.headerTitle = headerText
+
+          if (this.show == 1) {
+            this.postMsg = false
+            this.messageBoxData = {
+              userWork: '求职',
+              userRelease: '发布求职',
+              userSetting: '设置',
+              loginOut: '退出登录'
+            }
+
+            this.messageBoxDataPath = {
+              userWorkPage: 'userWork',
+              userReleasePage: 'userRelease',
+              userSettingPage: 'userSetting'
+            }
+
+          } else {
+            this.postMsg = true
+            this.messageBoxData = {
+              userWork: '职位',
+              userRelease: '发布职位',
+              userSetting: '设置',
+              loginOut: '退出登录'
+            }
+            this.messageBoxDataPath = {
+              userWorkPage: 'JgUserWork',
+              userReleasePage: 'JgUserRelease',
+              userSettingPage: 'userSetting'
+            }
+          }
+        }
       },
-    changeHeadBg:{
+    },
+    changeHeadBg: {
       handler(newNum, oldNum) {
         // console.log(newNum,oldNum)
         if (newNum == 1) {
           // console.log(newNum,oldNum+'top')
           this.bgShow = Number(newNum)
-        }else{
+        } else {
           // console.log(newNum,oldNum+'bot')
           this.bgShow = Number(newNum)
         }
       }
     },
-    changeHeadImg:{
-      handler(newImg,oldImg){
+    changeHeadImg: {
+      handler(newImg, oldImg) {
         this.userImgUrl = this.changeHeadImg.userHeadImg
         this.userName = this.changeHeadImg.userRealName
         // console.log(newImg,oldImg)
@@ -719,8 +739,8 @@ export default {
         }
       }
     },
-    uimg:{
-      handler(newL,oldL){
+    uimg: {
+      handler(newL, oldL) {
         // console.log('本地储存现在的地址是:'+newL)
         // console.log('本地储存之前的地址是:'+oldL)
       }
@@ -731,12 +751,12 @@ export default {
 
 <style scoped>
 @font-face {
-  font-family:PingFangSC-Regular;
-  src: url('../assets/PingFangSCRegular.ttf');
+  font-family: PingFangSC-Regular;
+  src: url("../assets/PingFangSCRegular.ttf");
 }
-.active{
+.active {
   background: #060606;
-  position:static;
+  position: static;
 }
 header {
   width: 100%;
@@ -756,7 +776,7 @@ header {
   vertical-align: middle;
   display: inline-block;
 }
-.header > div > div:nth-child(2){
+.header > div > div:nth-child(2) {
   text-align: end;
 }
 .selectPage {
@@ -790,7 +810,7 @@ header {
   margin-right: 13%;
   /* vertical-align: middle; */
 }
-.changeLanguage>div>span{
+.changeLanguage > div > span {
   cursor: pointer;
 }
 
@@ -800,10 +820,11 @@ header {
   display: inline-block;
   /* vertical-align: middle; */
 }
-.registerAndSignIn>div>span{
-    cursor: pointer;
+.registerAndSignIn > div > span {
+  cursor: pointer;
 }
-.changeLanguage2>div>div,.registerAndSignIn2>div>div{
+.changeLanguage2 > div > div,
+.registerAndSignIn2 > div > div {
   margin: 0 5px;
   height: 16px;
 }
@@ -814,11 +835,12 @@ header {
   display: inline-block;
   margin: 0 7px;
 }
-.changeLanguage>div>span,.changeLanguage>div>div{
+.changeLanguage > div > span,
+.changeLanguage > div > div {
   /* vertical-align: middle; */
   font-family: PingFangSC-Regular;
 }
-.user{
+.user {
   text-align: right;
 }
 
@@ -830,61 +852,61 @@ header {
   /* vertical-align: middle; */
   position: relative;
 }
-.userImgAndName>div>span{
+.userImgAndName > div > span {
   cursor: pointer;
   /* vertical-align: middle; */
 }
-.userImgAndName>div>div{
+.userImgAndName > div > div {
   vertical-align: middle;
 }
-.userHeadImg{    
-    width: 48px;
-    height: 48px;
-    display: inline-block;
-    overflow: hidden;
-    border-radius: 50%;
+.userHeadImg {
+  width: 48px;
+  height: 48px;
+  display: inline-block;
+  overflow: hidden;
+  border-radius: 50%;
 }
-.userHeadImg>img{
-    font-size: 0;
-    width: 100%;
+.userHeadImg > img {
+  font-size: 0;
+  width: 100%;
 }
 
 /* 设置模块 */
-.informationSetting{
+.informationSetting {
   position: absolute;
   top: 85px;
   right: -38px;
   width: 124px;
   z-index: 10;
 }
-.tSetting{
+.tSetting {
   background: white;
 }
-.tSetting>ul{
+.tSetting > ul {
   padding-top: 3px;
   padding-bottom: 6px;
 }
-.tSetting>ul>li{
+.tSetting > ul > li {
   /* padding-bottom: 18px; */
   padding: 9px 22px;
   background: white;
-  color:#717171;
+  color: #717171;
   text-align: center;
 }
-.tSetting2>ul>li:first-child{
+.tSetting2 > ul > li:first-child {
   padding: 18px 20px;
 }
-.tSetting>ul>li:hover{
-  background: #E9E9E9;
+.tSetting > ul > li:hover {
+  background: #e9e9e9;
 }
-.tSetting>ul>li>a{
+.tSetting > ul > li > a {
   color: #717171;
   font-size: 18px;
 }
-.tSetting2>ul>li>a{
+.tSetting2 > ul > li > a {
   font-size: 16px;
 }
-.signOut>button{
+.signOut > button {
   font-size: 18px;
   border: none;
   background: none;
@@ -892,15 +914,15 @@ header {
   cursor: pointer;
   outline: none;
 }
-.tSetting2 .signOut>button{
+.tSetting2 .signOut > button {
   font-size: 16px;
 }
-.tSetting>ul>li>p{
+.tSetting > ul > li > p {
   color: #717171;
   font-size: 20px;
   cursor: pointer;
 }
-.sanjiao{
+.sanjiao {
   margin: 0 auto;
   width: 0;
   height: 0;
@@ -922,13 +944,13 @@ header {
 .el-menu-item {
   font-size: 22px;
   color: white;
-  margin-right:52px;
+  margin-right: 52px;
   letter-spacing: 200;
   padding: 0;
   line-height: inherit;
   height: 38px;
 }
-.el-menu-item:last-child{
+.el-menu-item:last-child {
   margin-right: 0;
 }
 
@@ -939,55 +961,55 @@ header {
   color: white;
   border-bottom: 4px solid white;
 }
-.el-menu>.el-menu-item:hover{
+.el-menu > .el-menu-item:hover {
   background: none;
 }
 
 /* 特殊 */
-.registerBg{
-    background: black;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 99;
-    opacity: 0.4;
-}
-.signInBg{
-    background: black;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 99;
-    opacity: 0.4;
-}
-.forgotPwBg{
+.registerBg {
   background: black;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 99;
-    opacity: 0.4;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 99;
+  opacity: 0.4;
 }
-.ServiceAgmBg{
+.signInBg {
   background: black;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 99;
-    opacity: 0.4;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 99;
+  opacity: 0.4;
 }
-.signIn{
-    font-size: 0;
+.forgotPwBg {
+  background: black;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 99;
+  opacity: 0.4;
 }
-.el-menu--horizontal>.el-menu-item:not(.is-disabled):focus{
+.ServiceAgmBg {
+  background: black;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 99;
+  opacity: 0.4;
+}
+.signIn {
+  font-size: 0;
+}
+.el-menu--horizontal > .el-menu-item:not(.is-disabled):focus {
   background: none;
 }
 .routerLink {
@@ -997,11 +1019,11 @@ header {
   letter-spacing: 3px;
   font-family: PingFangSC-Regular;
 }
-.headerEn>ul>li>a{
+.headerEn > ul > li > a {
   letter-spacing: 0;
 }
 
-[class*=el-col-]{
-    float: none;
+[class*="el-col-"] {
+  float: none;
 }
 </style>

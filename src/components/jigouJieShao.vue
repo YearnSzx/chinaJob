@@ -76,6 +76,7 @@
                         type="textarea"
                         :autosize="{ minRows: 6, maxRows: 8 }"
                         v-model="orreData.orreWorkContent"
+                        :disabled="true"
                       ></el-input>
                     </div>
                   </div>
@@ -93,6 +94,7 @@
                         type="textarea"
                         :autosize="{ minRows: 6, maxRows: 8 }"
                         v-model="orreData.orreWorkRequirements"
+                        :disabled="true"
                       ></el-input>
                     </div>
                   </div>
@@ -121,6 +123,7 @@
                         type="textarea"
                         :autosize="{ minRows: 6, maxRows: 8 }"
                         v-model="orreData.orreOtherWelfare"
+                        :disabled="true"
                       ></el-input>
                     </div>
                   </div>

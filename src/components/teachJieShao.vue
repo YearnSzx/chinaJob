@@ -100,6 +100,7 @@
                               type="textarea"
                               :autosize="{ minRows: 6, maxRows: 8 }"
                               v-model="userData.ftapWorkExperience"
+                              :disabled="true"
                             ></el-input>
                           </div>
                         </div>
@@ -143,6 +144,7 @@
                           type="textarea"
                           :autosize="{ minRows: 6, maxRows: 8 }"
                           v-model="userData.ftapSelfIntroduction"
+                          :disabled="true"
                         ></el-input>
                       </div>
                     </div>
@@ -310,8 +312,6 @@ export default {
     this.$emit('gotoJieShao', 1)
   },
   created() {
-    // require('../assets/wechat/女.png') sexImgUrl
-
     let urlTemp = "assets/logo.png";
     this.zhangMenImgUrl = require("@/" + urlTemp);
     this.WeChat = require("@/assets/wechat/微信(1).png")
@@ -319,7 +319,7 @@ export default {
     let _this = this
     let ftapId = Number(sessionStorage.getItem('ftapId'))
     ftApplyList2(ftapId).then(res => {
-      // console.log(res)
+      console.log(res)
       userMessageList2(res.data.root[0].ftapUserId).then(res2 => {
         // console.log(res2)
         _this.userData = []
@@ -331,8 +331,6 @@ export default {
         } else {
           _this.sexImgUrl = require('../assets/wechat/女.png')
         }
-
-
 
         if (sessionStorage.getItem('changeChinese') == 'false') {
           if (_this.userData.ftapWorkVisa == 1) {
@@ -617,11 +615,6 @@ export default {
             this.userData.ftapEducationBackground = '博士'
           }
         }
-      }
-    },
-    'userData.userSex': {
-      handler(newL, oldL) {
-        // console.log(newL,oldL)
       }
     }
   }

@@ -74,7 +74,6 @@
                     <el-image
                       style="width: 100px; height: 100px"
                       :src="item.ftapImage"
-                      :fit="contain"
                     ></el-image>
                   </div>
                 </div>
@@ -85,7 +84,7 @@
                 <span>{{ tData.tCountry }}:{{ item.ftapCountry }}</span>
                 <p>{{ tData.hopePay }}:</p>
                 <p>
-                  ¥{{ item.ftapExpectedSalaryBottom }}-{{
+                  ¥{{ item.ftapExpectedSalaryBottom }}-¥{{
                     item.ftapExpectedSalaryTop
                   }}
                 </p>
@@ -114,7 +113,7 @@
                 <span>{{ tData.tCountry }}:{{ item.ftapCountry }}</span>
                 <p>{{ tData.hopePay }}:</p>
                 <p>
-                  ¥{{ item.ftapExpectedSalaryBottom }}-{{
+                  ¥{{ item.ftapExpectedSalaryBottom }}-¥{{
                     item.ftapExpectedSalaryTop
                   }}
                 </p>

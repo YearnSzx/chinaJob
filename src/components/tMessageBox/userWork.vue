@@ -4,40 +4,45 @@
       <div class="USBox">
         <div>
           <div class="usTitle">
-            <span>{{text.details}}</span>
+            <span>{{ text.details }}</span>
           </div>
           <div class="usContent">
             <div class="usContentBox">
-
               <div class="userMessage">
                 <div class="msgTitle">
-                  <p>{{text.dMessage}}</p>
+                  <p>{{ text.dMessage }}</p>
                 </div>
               </div>
 
               <div class="userMessage" v-if="noData">
                 <div>
-                  <p>{{text.addData}}<strong @click="goToAddData"> {{text.addLink}} </strong>{{text.addData2}}</p>
+                  <p>
+                    {{ text.addData
+                    }}<strong @click="goToAddData"> {{ text.addLink }} </strong
+                    >{{ text.addData2 }}
+                  </p>
                 </div>
               </div>
 
-              <div class="userMessage" v-for="(item, index) in jobWanted" :key="index">
+              <div
+                class="userMessage"
+                v-for="(item, index) in jobWanted"
+                :key="index"
+              >
                 <div>
-                  <p>{{item.ftapTeacherName}}</p>
+                  <p>{{ item.ftapTeacherName }}</p>
                 </div>
                 <div class="UOperation">
                   <div class="modifyinfo">
-                    <p @click="toModifInfo(item)">{{modify}}</p>
+                    <p @click="toModifInfo(item)">{{ modify }}</p>
                   </div>
                   <div class="cLine"></div>
                   <div class="delinfo">
-                    <p @click="toDelInfo(item)">{{del}}</p>
+                    <p @click="toDelInfo(item)">{{ del }}</p>
                   </div>
                 </div>
               </div>
-
             </div>
-
           </div>
         </div>
       </div>
@@ -46,44 +51,44 @@
 </template>
 
 <script>
-import {orreRecruit,ftApplyList,delApplyList,userMessageList2} from '@/utils/index'
+import { orreRecruit, ftApplyList, delApplyList, userMessageList2 } from '@/utils/index'
 export default {
-  props:['changeCNorEN'],
-  data () {
+  props: ['changeCNorEN'],
+  data() {
     return {
-      nicheng:'',
-      userName:'',
-      userPassword:'',
-      modify:'',
-      del:'',
-      jobWanted:[],
-      text:{
-        details:'',
-        dMessage:''
+      nicheng: '',
+      userName: '',
+      userPassword: '',
+      modify: '',
+      del: '',
+      jobWanted: [],
+      text: {
+        details: '',
+        dMessage: ''
       },
-      changeCNorEN2:'',
-      noData:false
+      changeCNorEN2: '',
+      noData: false
     }
   },
-  methods:{
-    toModifInfo:function(item){
+  methods: {
+    toModifInfo: function (item) {
       // console.log(item)
-      this.$router.push({name:'UserRelease'})
-      this.$emit('userWorkData',item)
+      this.$router.push({ name: 'UserRelease' })
+      this.$emit('userWorkData', item)
     },
-    toDelInfo:function(item){
+    toDelInfo: function (item) {
       // console.log(item.ftapId)
       let data = {
-        id:item.ftapId
+        id: item.ftapId
       }
-      delApplyList(data).then(res=>{
+      delApplyList(data).then(res => {
         // console.log(res)
         if (res.data.success) {
           let data = {
-            ftapUserId:Number(sessionStorage.getItem('userId'))
+            ftapUserId: Number(sessionStorage.getItem('userId'))
           }
           // console.log(data)
-          ftApplyList(data).then((res)=>{
+          ftApplyList(data).then((res) => {
             // console.log(res.data.root)
             // this.jobWanted = Object.assign({},res.data.root)
             this.jobWanted = res.data.root
@@ -92,95 +97,95 @@ export default {
         }
       })
     },
-    goToAddData(){
-      this.$router.push({name:'UserRelease'})
+    goToAddData() {
+      this.$router.push({ name: 'UserRelease' })
     }
   },
   beforeCreate() {
-    this.$emit('gotoJieShao',1)
+    this.$emit('gotoJieShao', 1)
   },
-  created(){
+  created() {
     // console.log(sessionStorage.getItem('userId'))
     let data = {
-      ftapUserId:Number(sessionStorage.getItem('userId'))
+      ftapUserId: Number(sessionStorage.getItem('userId'))
     }
     // console.log(data)
-    ftApplyList(data).then((res)=>{
+    ftApplyList(data).then((res) => {
       console.log(res)
       this.jobWanted = res.data.root
       if (this.jobWanted.length == 0) {
         this.noData = true
       }
     })
-    userMessageList2(Number(sessionStorage.getItem('userId'))).then(res=>{
+    userMessageList2(Number(sessionStorage.getItem('userId'))).then(res => {
       console.log(res)
       let data = {
-        userRealName:res.data.root[0].userRealName,
-        userHeadImg:res.data.root[0].userHeadImg
+        userRealName: res.data.root[0].userRealName,
+        userHeadImg: res.data.root[0].userHeadImg
       }
-      this.$emit('headerUserImg',data)
+      this.$emit('headerUserImg', data)
     })
 
     // this.$emit('gotoJieShao',1)
     this.changeCNorEN2 = sessionStorage.getItem('changeChinese')
     this.$emit("changeLanguage", this.changeCNorEN2)//在上传一次，就可以让值变动
-    if(sessionStorage.getItem('changeChinese')=='false'){
+    if (sessionStorage.getItem('changeChinese') == 'false') {
       this.del = 'del'
       this.modify = 'modify'
-      this.text={
-        details:'Job details',
-        dMessage:'Published job search information',
-        addData:'No recruitment information, click',
-        addLink:'Link',
-        addData2:'to add recruitment information'
+      this.text = {
+        details: 'Job details',
+        dMessage: 'Published job search information',
+        addData: 'No recruitment information, click',
+        addLink: 'Link',
+        addData2: 'to add recruitment information'
       }
       this.text.details = 'Job details'
-    }else{
+    } else {
       this.del = '删除'
       this.modify = '修改'
-      this.text={
-        details:'求职',
-        dMessage:'已经发布的求职信息',
-        addData:'暂无求职信息点击',
-        addLink:'链接',
-        addData2:'添加求职信息'
+      this.text = {
+        details: '求职',
+        dMessage: '已经发布的求职信息',
+        addData: '暂无求职信息点击',
+        addLink: '链接',
+        addData2: '添加求职信息'
       }
     }
   },
-  watch:{
-    changeCNorEN:{
-      handler(newL,oldL){
+  watch: {
+    changeCNorEN: {
+      handler(newL, oldL) {
         // console.log(this.changeCNorEng)
-        if(newL=='false'){
+        if (newL == 'false') {
           this.del = 'del'
           this.modify = 'modify'
-          this.text={
-            details:'Job details',
-            dMessage:'Published job search information',
-            addData:'No recruitment information, click',
-            addLink:'Link',
-            addData2:'to add recruitment information'
+          this.text = {
+            details: 'Job details',
+            dMessage: 'Published job search information',
+            addData: 'No recruitment information, click',
+            addLink: 'Link',
+            addData2: 'to add recruitment information'
           }
           this.text.details = 'Job details'
-        }else{
+        } else {
           this.del = '删除'
           this.modify = '修改'
-          this.text={
-            details:'求职',
-            dMessage:'已经发布的求职信息',
-            addData:'暂无求职信息点击',
-            addLink:'链接',
-            addData2:'添加求职信息'
+          this.text = {
+            details: '求职',
+            dMessage: '已经发布的求职信息',
+            addData: '暂无求职信息点击',
+            addLink: '链接',
+            addData2: '添加求职信息'
           }
         }
       }
     },
-    jobWanted:{
-      handler(newL,oldL){
+    jobWanted: {
+      handler(newL, oldL) {
         // console.log(newL,oldL)
-        if(newL.length == 0){
+        if (newL.length == 0) {
           this.noData = true
-        }else{
+        } else {
           this.noData = false
         }
       }
@@ -191,94 +196,92 @@ export default {
 </script>
 
 <style scoped>
-.UserSetting{
+.UserSetting {
   width: 100%;
-  background: #F6F6F8;
+  background: #f6f6f8;
   display: inline-block;
 }
-.USBox{
+.USBox {
   max-width: 1200px;
   margin: 0 auto;
   padding-top: 50px;
   margin-bottom: 108px;
 }
-.usTitle>span{
+.usTitle > span {
   font-size: 32px;
   display: inline-block;
   padding: 23px 0;
 }
-.usContent{
+.usContent {
   width: 100%;
   /* height: 900px; */
   background: white;
 }
-.usContentBox{
+.usContentBox {
   width: 100%;
   display: inline-block;
   font-size: 0;
 }
 
-.usContentBox>div{
+.usContentBox > div {
   padding: 28px 0 28px 30px;
   display: inline-block;
   width: 100%;
   box-sizing: border-box;
-  border-bottom: 2px solid #E5E5E5;
+  border-bottom: 2px solid #e5e5e5;
 }
-.usContentBox>div:first-child{
+.usContentBox > div:first-child {
   padding: 68px 0 54px 30px;
 }
-.usContentBox>div>div{
+.usContentBox > div > div {
   display: inline-block;
 }
 
-
-.userMessage{
+.userMessage {
   font-size: 30px;
   box-sizing: border-box;
   display: inline-block;
   color: #717171;
   position: relative;
 }
-.userMessage>div>p{
+.userMessage > div > p {
   font-size: 24px;
 }
-.userMessage>div>p>strong{
+.userMessage > div > p > strong {
   cursor: pointer;
 }
-.msgTitle{
+.msgTitle {
   font-size: 26px;
   font-weight: 600;
   color: #060606;
 }
 
-.changeMessage{
+.changeMessage {
   width: 100%;
   box-sizing: border-box;
   display: inline-block;
 }
-.changeMessageBox{
+.changeMessageBox {
   margin: 0 auto;
   padding-top: 98px;
   padding-bottom: 88px;
 }
-.changeMessageBox>div{
+.changeMessageBox > div {
   text-align: center;
 }
 
-
-.UOperation{
+.UOperation {
   position: absolute;
   right: 30px;
 }
-.UOperation>div{
+.UOperation > div {
   display: inline-block;
 }
-.UOperation>div>p{
+.UOperation > div > p {
   font-size: 24px;
   cursor: pointer;
 }
-.cLine{
+.cLine {
   width: 1px;
   height: 30px;
   border-left: 1px solid gray;

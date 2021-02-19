@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
@@ -12,18 +12,19 @@ export default {
 
 <style>
 @font-face {
-  font-family:PingFangSC-Regular;
-  src: url('./assets/PingFangSCRegular.ttf');
+  font-family: PingFangSC-Regular;
+  src: url("./assets/PingFangSCRegular.ttf");
 }
 
-*{
+* {
   margin: 0;
   padding: 0;
   font-family: PingFangSC-Regular;
 }
-a,li,ul{
+a,
+li,
+ul {
   text-decoration: none;
   list-style: none;
 }
-
 </style>

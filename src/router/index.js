@@ -63,7 +63,8 @@ const router = new Router({
     },
     {
       path:'/whiteHouse',name:'whiteHouse',component:WhiteHouse
-    }
+    },
+    { path: '*', component: HomePage }
   ]
 })
 

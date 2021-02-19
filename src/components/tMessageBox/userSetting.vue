@@ -4,14 +4,13 @@
       <div class="USBox">
         <div>
           <div class="usTitle">
-            <span>{{settingTxt.Settings}}</span>
+            <span>{{ settingTxt.Settings }}</span>
           </div>
           <div class="usContent">
             <div class="usContentBox">
-
               <div>
                 <div class="touxiang">
-                  <p>{{settingTxt.ProfilePhoto}}</p>
+                  <p>{{ settingTxt.ProfilePhoto }}</p>
                 </div>
                 <div class="headImg">
                   <el-upload
@@ -24,48 +23,53 @@
                     :on-preview="handlePictureCardPreview"
                     :file-list="imageFileList"
                     :before-upload="haveHeadImg"
-                    :class="{disabled:uploadDisabled == true}"
-                    :on-remove="handleRemove">
+                    :class="{ disabled: uploadDisabled == true }"
+                    :on-remove="handleRemove"
+                  >
                     <i class="el-icon-plus"></i>
                   </el-upload>
                   <el-dialog :visible.sync="dialogVisible">
-                    <img width="100%" :src="dialogImageUrl" alt="">
+                    <img width="100%" :src="dialogImageUrl" alt="" />
                   </el-dialog>
                 </div>
               </div>
 
               <div class="userMessage">
                 <div class="">
-                  <p>{{settingTxt.Name}}</p>
+                  <p>{{ settingTxt.Name }}</p>
                 </div>
                 <div>
                   <el-input v-model="nicheng" :placeholder="nicheng"></el-input>
                 </div>
               </div>
-              
+
               <div class="userMessage">
                 <div class="">
-                  <p>{{settingTxt.LoginID}}</p>
+                  <p>{{ settingTxt.LoginID }}</p>
                 </div>
                 <div>
-                  <el-input v-model="userName" :placeholder="userName"></el-input>
+                  <el-input
+                    v-model="userName"
+                    :placeholder="userName"
+                  ></el-input>
                 </div>
               </div>
 
               <div class="userMessage">
                 <div class="">
-                  <p>{{settingTxt.Password}}</p>
+                  <p>{{ settingTxt.Password }}</p>
                 </div>
                 <div>
                   <el-input v-model="userPassword" show-password></el-input>
                 </div>
               </div>
-
             </div>
             <div class="changeMessage">
               <div class="changeMessageBox">
                 <div>
-                  <el-button type="primary" @click="submit">{{settingTxt.sub}}</el-button>
+                  <el-button type="primary" @click="submit">{{
+                    settingTxt.sub
+                  }}</el-button>
                 </div>
               </div>
             </div>
@@ -76,88 +80,87 @@
   </div>
 </template>
 <style>
-  
 </style>
 <script>
-import {cMessage,userMessageList2,ftApplyList} from '@/utils/index'  // 登陆接口
+import { cMessage, userMessageList2, ftApplyList } from '@/utils/index'  // 登陆接口
 export default {
-  props:['changeCNorEN','userId'],
-  data () {
+  props: ['changeCNorEN', 'userId'],
+  data() {
     return {
-      nicheng:'',
-      userName:'',
-      userPassword:'',
-      changeCNorEN2:'',
-      uploadDisabled:false,
-      settingTxt:{
-        Settings:'',
-        ProfilePhoto:'',
-        Name:'',
-        LoginID:'',
-        Password:'',
-        sub:''
+      nicheng: '',
+      userName: '',
+      userPassword: '',
+      changeCNorEN2: '',
+      uploadDisabled: false,
+      settingTxt: {
+        Settings: '',
+        ProfilePhoto: '',
+        Name: '',
+        LoginID: '',
+        Password: '',
+        sub: ''
       },
       // 头像
       dialogImageUrl: '',
       dialogVisible: false,
-      autoUp:false,
-      imageFileList:[],
-      headImg:'',
-      userRoleId:''
+      autoUp: false,
+      imageFileList: [],
+      headImg: '',
+      userRoleId: ''
     }
   },
-  methods:{
-    submit:function(){
+  methods: {
+    submit: function () {
       let uid = sessionStorage.getItem('userId')
       // console.log(uid)
-      let data =  {
-        userId:uid,
-        userRealName:this.nicheng,
-        userAccount:this.userName,
-        userPassword:this.userPassword,
-        userHeadImg:this.headImg,
-        userRoleId:this.userRoleId
+      let data = {
+        userId: uid,
+        userRealName: this.nicheng,
+        userAccount: this.userName,
+        userPassword: this.userPassword,
+        userHeadImg: this.headImg,
+        userRoleId: this.userRoleId
       }
       // console.log(data)
       let timeOut = setTimeout(() => {
-        if(sessionStorage.getItem('changeChinese')=='false'){
-            this.$message({
-              message:'Modification failed, network error, please try again later',
-              type:'error'
-            });
-          }else{
-            this.$message({
-              message:'修改失败,网络错误,请稍后再试',
-              type:'error'
-            });
-          }
+        if (sessionStorage.getItem('changeChinese') == 'false') {
+          this.$message({
+            message: 'Modification failed, network error, please try again later',
+            type: 'error'
+          });
+        } else {
+          this.$message({
+            message: '修改失败,网络错误,请稍后再试',
+            type: 'error'
+          });
+        }
       }, 5000);
-      cMessage(data).then((res)=>{
+      cMessage(data).then((res) => {
         // console.log(res)
         if (res.data.success) {
           clearTimeout(timeOut)
-          if(sessionStorage.getItem('changeChinese')=='false'){
+          if (sessionStorage.getItem('changeChinese') == 'false') {
             this.$message({
-              message:'Modified successfully',
-              type:'success'
+              message: 'Modified successfully',
+              type: 'success'
             });
-          }else{
+          } else {
             this.$message({
-              message:'修改成功',
-              type:'success'
+              message: '修改成功',
+              type: 'success'
             });
           }
           // this.$router.replace({path:'/whiteHouse'}) // 白宫中转
-        }else{
-          if(sessionStorage.getItem('changeChinese')=='false'){
+        } else {
+          if (sessionStorage.getItem('changeChinese') == 'false') {
             this.$message({
-              message:'Modified faild',
-              type:'error'
+              message: 'Modified faild',
+              type: 'error'
             });
-          }else{
+          } else {
             this.$message({
-              message:'修改失败',
-              type:'error'
+              message: '修改失败',
+              type: 'error'
             });
           }
         }
@@ -179,12 +182,12 @@ export default {
         this.imageFileList = list;
       }
     },
-    haveHeadImg(file){
+    haveHeadImg(file) {
       // console.log(file)
     },
-    handleLimit(file,fileList){
+    handleLimit(file, fileList) {
       // console.log(file,fileList)
-      if(fileList.length == 1){
+      if (fileList.length == 1) {
         this.uploadDisabled = true;
       }
     },
@@ -192,27 +195,27 @@ export default {
       this.dialogImageUrl = file.url;
       this.dialogVisible = true;
     },
-    UpLoadSuccess(response, file, fileList){
+    UpLoadSuccess(response, file, fileList) {
       // console.log(response.path)
       this.imageFileList.push({
         name: file.name,
-        url: 'http://admin.hichinajob.com'+response.path,
+        url: 'http://admin.hichinajob.com' + response.path,
         type: '.' + file.name.split(".")[file.name.split(".").length - 1]
       });
       // console.log(response)
       let uid = sessionStorage.getItem('userId')
       // console.log(this.imageFileList)
-      this.headImg = 'http://admin.hichinajob.com'+response.path
-      this.$emit('headerUserImg',this.headImg)
+      this.headImg = 'http://admin.hichinajob.com' + response.path
+      this.$emit('headerUserImg', this.headImg)
       // console.log(this.headImgPath)
       // console.log(file)
       // console.log(fileList)
     }
   },
-  created(){
+  created() {
     let userid = sessionStorage.getItem('userId')
     // console.log(sessionStorage.getItem('userId'))
-    userMessageList2(userid).then((res)=>{
+    userMessageList2(userid).then((res) => {
       // console.log(res)
       // userRoleId
       this.userRoleId = res.data.root[0].userRoleId
@@ -236,62 +239,62 @@ export default {
       }
     })
     let dataId = {
-      ftapUserId:Number(sessionStorage.getItem('userId'))
+      ftapUserId: Number(sessionStorage.getItem('userId'))
     }
-    ftApplyList(dataId).then(res=>{
+    ftApplyList(dataId).then(res => {
       // console.log(res)
       this.nicheng = res.data.root[0].ftapTeacherName
     })
-    this.$emit('gotoJieShao',1)
+    this.$emit('gotoJieShao', 1)
     this.changeCNorEN2 = sessionStorage.getItem('changeChinese')
     this.$emit("changeLanguage", this.changeCNorEN2)//在上传一次，就可以让值变动
-    if(sessionStorage.getItem('changeChinese')=='false'){
-      this.settingTxt={
-        Settings:'Settings',
-        ProfilePhoto:'Profile Photo',
-        Name:'Name',
-        LoginID:'Login ID',
-        Password:'Password',
-        sub:'Confirm the changes'
+    if (sessionStorage.getItem('changeChinese') == 'false') {
+      this.settingTxt = {
+        Settings: 'Settings',
+        ProfilePhoto: 'Profile Photo',
+        Name: 'Name',
+        LoginID: 'Login ID',
+        Password: 'Password',
+        sub: 'Confirm the changes'
       }
-    }else{
-      this.settingTxt={
-        Settings:'设置',
-        ProfilePhoto:'头像',
-        Name:'昵称',
-        LoginID:'登陆账号',
-        Password:'登陆密码',
-        sub:'确认修改'
+    } else {
+      this.settingTxt = {
+        Settings: '设置',
+        ProfilePhoto: '头像',
+        Name: '昵称',
+        LoginID: '登陆账号',
+        Password: '登陆密码',
+        sub: '确认修改'
       }
     }
   },
-  mounted(){
+  mounted() {
     // userMessageList2(Number(sessionStorage.getItem('userId'))).then(res=>{
-      // console.log(res)
-      
-      
+    // console.log(res)
+
+
     // })
   },
-  watch:{
-    changeCNorEN:{
-      handler(newL,oldL){
-        if(newL=='false'){
-          this.settingTxt={
-            Settings:'Settings',
-            ProfilePhoto:'Profile Photo',
-            Name:'Name',
-            LoginID:'Login ID',
-            Password:'Password',
-            sub:'Confirm the changes'
+  watch: {
+    changeCNorEN: {
+      handler(newL, oldL) {
+        if (newL == 'false') {
+          this.settingTxt = {
+            Settings: 'Settings',
+            ProfilePhoto: 'Profile Photo',
+            Name: 'Name',
+            LoginID: 'Login ID',
+            Password: 'Password',
+            sub: 'Confirm the changes'
           }
-        }else{
-          this.settingTxt={
-            Settings:'设置',
-            ProfilePhoto:'头像',
-            Name:'昵称',
-            LoginID:'登陆账号',
-            Password:'登陆密码',
-            sub:'确认修改'
+        } else {
+          this.settingTxt = {
+            Settings: '设置',
+            ProfilePhoto: '头像',
+            Name: '昵称',
+            LoginID: '登陆账号',
+            Password: '登陆密码',
+            sub: '确认修改'
           }
         }
       }
@@ -302,106 +305,104 @@ export default {
 </script>
 
 <style scoped>
-.UserSetting{
+.UserSetting {
   width: 100%;
-  background: #F6F6F8;
+  background: #f6f6f8;
   display: inline-block;
 }
-.USBox{
+.USBox {
   max-width: 1200px;
   margin: 0 auto;
   padding-top: 50px;
   margin-bottom: 108px;
 }
-.usTitle>span{
+.usTitle > span {
   font-size: 32px;
   display: inline-block;
   padding: 23px 0;
 }
-.usContent{
+.usContent {
   width: 100%;
   /* height: 900px; */
   background: white;
 }
-.usContentBox{
+.usContentBox {
   width: 100%;
   display: inline-block;
   font-size: 0;
 }
 
-.usContentBox>div{
+.usContentBox > div {
   padding: 35px 109px 35px 73px;
   display: inline-block;
   width: 100%;
   box-sizing: border-box;
-  border-bottom: 2px solid #E5E5E5;
+  border-bottom: 2px solid #e5e5e5;
 }
-.usContentBox>div:first-child{
+.usContentBox > div:first-child {
   padding: 88px 100px 88px 73px;
 }
-.usContentBox>div::after{
+.usContentBox > div::after {
   clear: both;
 }
-.usContentBox>div>div{
+.usContentBox > div > div {
   display: inline-block;
 }
-.touxiang{
+.touxiang {
   float: left;
 }
-.usContentBox>div>.touxiang>p{
+.usContentBox > div > .touxiang > p {
   font-size: 26px;
   color: #060606;
   line-height: 140px;
 }
-.headImg{
+.headImg {
   float: right;
 }
 
-.userMessage{
+.userMessage {
   font-size: 26px;
   box-sizing: border-box;
   display: inline-block;
 }
-.userMessage>div:first-child{
+.userMessage > div:first-child {
   float: left;
 }
-.userMessage>div:last-child{
+.userMessage > div:last-child {
   float: right;
 }
 
-
-.changeMessage{
+.changeMessage {
   width: 100%;
   box-sizing: border-box;
   display: inline-block;
 }
-.changeMessageBox{
+.changeMessageBox {
   margin: 0 auto;
   padding-top: 98px;
   padding-bottom: 88px;
 }
-.changeMessageBox>div{
+.changeMessageBox > div {
   text-align: center;
 }
 
-
-.changeMessageBox>>>.el-button{
+.changeMessageBox >>> .el-button {
   padding: 22px 98px;
   font-size: 26px;
-  background: #003AB8;
+  background: #003ab8;
 }
-  /* 头像 */
-.headImg>>>.avatar-uploader .el-upload {
+/* 头像 */
+.headImg >>> .avatar-uploader .el-upload {
   border: 1px dashed #d9d9d9;
   border-radius: 6px;
   cursor: pointer;
   position: relative;
   overflow: hidden;
 }
-.headImg>>>.avatar-uploader .el-upload:hover {
-  border-color: #409EFF;
+.headImg >>> .avatar-uploader .el-upload:hover {
+  border-color: #409eff;
 }
-.headImg>>>.avatar-uploader-icon {
+.headImg >>> .avatar-uploader-icon {
   font-size: 28px;
   color: #8c939d;
   width: 178px;
@@ -409,12 +410,12 @@ export default {
   line-height: 178px;
   text-align: center;
 }
-.headImg>>>.avatar {
+.headImg >>> .avatar {
   width: 178px;
   height: 178px;
   display: block;
 }
-.headImg>>>.disabled .el-upload--picture-card {
-    display: none!important;
+.headImg >>> .disabled .el-upload--picture-card {
+  display: none !important;
 }
 </style>

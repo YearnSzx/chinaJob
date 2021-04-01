@@ -1,4 +1,3 @@
-<!--  -->
 <template>
   <div>
     <header :class="{ active: bgShow == 1 }">
@@ -33,7 +32,7 @@
                     }}</router-link>
                   </el-menu-item>
                   <el-menu-item index="3">
-                    <router-link to="/findTeach" class="routerLink">{{
+                    <router-link to="/findTeacher" class="routerLink">{{
                       headerTitle.findTeach
                     }}</router-link>
                   </el-menu-item>
@@ -185,7 +184,7 @@ import signIn from './signIn.vue'
 import forgotPassWord from './forgotPassWord.vue'
 import serviceAgreement from './ServiceAgreement.vue'
 
-import { ftJobWanted, orreRecruit, signOut, login, userMessageList2, ftApplyList, orreRecruit4 } from '@/utils/index'
+import { signOut, userMessageList2 } from '@/utils/index'
 export default {
   components: { register, signIn, forgotPassWord, serviceAgreement },
   props: ['changeHeadBg', 'changeHeadImg'],
@@ -235,7 +234,6 @@ export default {
       userid: '', //唯一标识
       // 设置一个控制中英文的数据
       changeEngAndChina: true,
-      uimg: '',
       isDisable: false,
       // 英文状态下的导航
       dhEN: false
@@ -332,8 +330,8 @@ export default {
           }
         }
         this.messageBoxDataPath = {
-          userWorkPage: 'userWork',
-          userReleasePage: 'userRelease',
+          userWorkPage: 'application',
+          userReleasePage: 'applicationModify',
           userSettingPage: 'userSetting'
         }
       } else {
@@ -354,7 +352,7 @@ export default {
           }
         }
         this.messageBoxDataPath = {
-          userWorkPage: 'JgUserWork',
+          userWorkPage: 'jobDetails',
           userReleasePage: 'JgUserRelease',
           userSettingPage: 'userSetting'
         }
@@ -563,8 +561,8 @@ export default {
           }
         }
         this.messageBoxDataPath = {
-          userWorkPage: 'userWork',
-          userReleasePage: 'userRelease',
+          userWorkPage: 'application',
+          userReleasePage: 'applicationModify',
           userSettingPage: 'userSetting'
         }
 
@@ -587,7 +585,7 @@ export default {
         }
 
         this.messageBoxDataPath = {
-          userWorkPage: 'JgUserWork',
+          userWorkPage: 'jobDetails',
           userReleasePage: 'JgUserRelease',
           userSettingPage: 'userSetting'
         }
@@ -649,8 +647,8 @@ export default {
             }
 
             this.messageBoxDataPath = {
-              userWorkPage: 'userWork',
-              userReleasePage: 'userRelease',
+              userWorkPage: 'application',
+              userReleasePage: 'applicationModify',
               userSettingPage: 'userSetting'
             }
           } else {
@@ -663,7 +661,7 @@ export default {
             }
 
             this.messageBoxDataPath = {
-              userWorkPage: 'JgUserWork',
+              userWorkPage: 'jobDetails',
               userReleasePage: 'JgUserRelease',
               userSettingPage: 'userSetting'
             }
@@ -691,8 +689,8 @@ export default {
             }
 
             this.messageBoxDataPath = {
-              userWorkPage: 'userWork',
-              userReleasePage: 'userRelease',
+              userWorkPage: 'application',
+              userReleasePage: 'applicationModify',
               userSettingPage: 'userSetting'
             }
 
@@ -705,7 +703,7 @@ export default {
               loginOut: '退出登录'
             }
             this.messageBoxDataPath = {
-              userWorkPage: 'JgUserWork',
+              userWorkPage: 'jobDetails',
               userReleasePage: 'JgUserRelease',
               userSettingPage: 'userSetting'
             }
@@ -727,22 +725,19 @@ export default {
     },
     changeHeadImg: {
       handler(newImg, oldImg) {
-        this.userImgUrl = this.changeHeadImg.userHeadImg
-        this.userName = this.changeHeadImg.userRealName
-        // console.log(newImg,oldImg)
+        // this.userImgUrl = this.changeHeadImg
+        // this.userName = this.changeHeadImg.userRealName
         // console.log(this.changeHeadImg)
-        if (newImg.userHeadImg == null || newImg.userHeadImg == 'null' || newImg.userHeadImg == undefined || newImg.userHeadImg == 'undefined') {
-          this.userImgUrl = require("@/assets/logo.png");
+        console.log(newImg)
+        if (newImg || newImg == 0) {
+          userMessageList2(Number(sessionStorage.getItem('userId'))).then(res => {
+            console.log(res)
+            this.userImgUrl = res.data.root[0].userHeadImg
+            this.userName = res.data.root[0].userRealName
+          })
+        } else {
+          console.log('修改失败')
         }
-        if (!newImg.userRealName) {
-          this.userName = sessionStorage.getItem("userName")
-        }
-      }
-    },
-    uimg: {
-      handler(newL, oldL) {
-        // console.log('本地储存现在的地址是:'+newL)
-        // console.log('本地储存之前的地址是:'+oldL)
       }
     }
   }

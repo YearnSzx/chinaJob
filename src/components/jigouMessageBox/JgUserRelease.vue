@@ -18,7 +18,7 @@
                   <div class="msgContentTitle1">{{ textTitle.CName }}</div>
                   <el-input
                     v-model="form.CName"
-                    maxlength="10"
+                    maxlength="20"
                     show-word-limit
                   ></el-input>
                 </el-form-item>
@@ -34,12 +34,25 @@
                   <div class="msgContentTitle1">{{ textTitle.Titleofri }}</div>
                   <el-input v-model="form.Titleofri"></el-input>
                 </el-form-item>
+
+                <!-- <el-form-item prop="WorkingLocation">
+                  
+                  <el-input v-model="form.WorkingLocation"></el-input>
+                </el-form-item> -->
+
                 <el-form-item prop="WorkingLocation">
                   <div class="msgContentTitle1">
                     {{ textTitle.WorkingLocation }}
                   </div>
-                  <el-input v-model="form.WorkingLocation"></el-input>
+                  <el-cascader
+                    v-model="form.WorkingLocation"
+                    :placeholder="select"
+                    :options="cityData"
+                    @change="handleChange"
+                  >
+                  </el-cascader>
                 </el-form-item>
+
                 <el-form-item prop="WorkingMode">
                   <div class="msgContentTitle1">
                     {{ textTitle.WorkingMode }}
@@ -134,6 +147,8 @@
 
 <script>
 import { orgApplyAdd, changeOrreMsg, orreRecruit4 } from '@/utils/index'  // 登陆接口
+import { getCity } from '../../api/data'
+
 export default {
   props: ['changeCNorEN', 'jigouMessage'],
   data() {
@@ -244,10 +259,16 @@ export default {
       dialogVisible: false,
       headImgPath: '',
       uploadDisabled: false,
-      modefyData: ''
+      modefyData: '',
+
+      select: '',
+      cityData: ''
     }
   },
   methods: {
+    handleChange(value) {
+      console.log()
+    },
     rulesFn() {
       if (sessionStorage.getItem('changeChinese') == 'false') {
         return this.rules
@@ -297,6 +318,11 @@ export default {
           if (routeFrom == 2 && this.modefyData) {
             let oid = this.jigouMessage.orreId
             let uid = this.jigouMessage.orreUserId
+            // console.log(this.form.WorkingLocation)
+            // if(this.form.WorkingLocation){
+
+            // }
+            this.form.WorkingLocation = this.form.WorkingLocation[1]
             let data = {
               orreId: oid,
               orreUserId: uid,
@@ -312,10 +338,11 @@ export default {
               orreWorkRequirements: this.form.Qualifications,
               orreLogo: this.headImgPath
             }
+            console.log(data)
             changeOrreMsg(data).then(res => {
               // console.log(res)
               if (res.data.success) {
-                this.$router.push({ path: '/JgUserWork' })
+                this.$router.push({ path: '/jobDetails' })
               }
             })
           } else {
@@ -352,7 +379,7 @@ export default {
                   });
                 }
                 setTimeout(() => {
-                  this.$router.push({ path: '/JgUserWork' })
+                  this.$router.push({ path: '/jobDetails' })
                 }, 500);
               } else {
                 if (sessionStorage.getItem('changeChinese') == 'false') {
@@ -373,14 +400,12 @@ export default {
           }
 
         } else {
-          // console.log('error submit!!');
           return false;
         }
       });
     },
 
     handleRemove(file, fileList) {
-      // console.log(file, fileList);
       this.uploadDisabled = false;
       let list = [];
       if (fileList.length === 0) {
@@ -396,7 +421,6 @@ export default {
       }
     },
     handleLimit(file, fileList) {
-      //  console.log(file,fileList)
       if (fileList.length == 1) {
         this.uploadDisabled = true;
       }
@@ -411,18 +435,28 @@ export default {
         url: 'http://admin.hichinajob.com' + response.path,
         type: '.' + file.name.split(".")[file.name.split(".").length - 1]
       });
-      //  console.log(response)
       this.headImgPath = 'http://admin.hichinajob.com' + response.path
-      //  this.$emit('headerUserImg',this.headImgPath)
-      //  console.log(this.headImgPath)
-      //  console.log(file)
-      //  console.log(fileList)
     },
   },
   beforeCreate() {
     this.$emit('gotoJieShao', 1)
   },
   created() {
+    // 城市的中英切换
+    let citys = getCity();
+    if (sessionStorage.getItem('changeChinese') == 'false') {
+      citys.forEach(city => {
+        if (city.children) {
+          city.label = city.value
+          let citySons = city.children
+          citySons.forEach(citySon => {
+            citySon.label = citySon.value
+          });
+        }
+      });
+    }
+    this.cityData = citys
+
     this.$emit('gotoJieShao', 1)
     this.changeCNorEN2 = sessionStorage.getItem('changeChinese')
     this.$emit("changeLanguage", this.changeCNorEN2)//在上传一次，就可以让值变动
@@ -444,6 +478,7 @@ export default {
         online: 'Online',
         onChina: 'In China'
       }
+      this.select = 'Please select'
     } else {
       this.textTitle = {
         PostingRecruitingInformation: '发布招聘信息',
@@ -462,6 +497,7 @@ export default {
         online: '线上',
         onChina: '中国'
       }
+      this.select = '请选择'
     }
   },
   beforeCreate() {
@@ -472,7 +508,20 @@ export default {
     if (sessionStorage.getItem('clearData') == 'true') {
       this.modefyData = this.jigouMessage
     }
-    // console.log(this.modefyData)
+    // console.log(getCity())
+    let citys = getCity()
+    citys.forEach(city => {
+      if (city.children) {
+        let citySons = city.children
+        citySons.forEach(citySon => {
+          // console.log(citySon.value)
+          if (this.modefyData.orreWorkAddress == citySon.value) {
+            // console.log('成功了')
+          }
+        });
+      }
+    });
+    // console.log(this.modefyData.orreWorkAddress)
     this.form = {
       CName: this.modefyData.orreOrgName,
       EName: this.modefyData.orreOrgNameEn,
@@ -552,7 +601,21 @@ export default {
             online: 'Online',
             onChina: 'In China'
           }
-          // this.text.details = 'Job details'
+          this.select = 'Please select'
+
+          let citys = getCity();
+          if (sessionStorage.getItem('changeChinese') == 'false') {
+            citys.forEach(city => {
+              if (city.children) {
+                city.label = city.value
+                let citySons = city.children
+                citySons.forEach(citySon => {
+                  citySon.label = citySon.value
+                });
+              }
+            });
+          }
+          this.cityData = citys
         } else {
           this.textTitle = {
             PostingRecruitingInformation: '发布招聘信息',
@@ -571,6 +634,10 @@ export default {
             online: '线上',
             onChina: '中国'
           }
+          this.select = '请选择'
+
+          let citys = getCity();
+          this.cityData = citys
         }
       }
     },
@@ -615,9 +682,10 @@ export default {
   margin-bottom: 57px;
 }
 .msgContentTitle1 {
-  font-size: 26px;
+  font-size: 22px;
   color: #080808;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  line-height: initial;
 }
 .msgContentTitle1::before {
   content: "*";
@@ -625,9 +693,9 @@ export default {
   margin-right: 5px;
 }
 .msgContentTitle2 {
-  font-size: 26px;
+  font-size: 22px;
   color: #080808;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
 }
 .line {
   text-align: left;
@@ -677,5 +745,9 @@ export default {
 /* // .el-upload--picture-card 控制加号部分 */
 .usContentBox >>> .disabled .el-upload--picture-card {
   display: none !important;
+}
+
+.usContentBox >>> .el-cascader {
+  width: 100%;
 }
 </style>

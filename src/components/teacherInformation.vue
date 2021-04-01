@@ -115,9 +115,9 @@
                       <p>{{ mTitle.SalaryExpectation }}</p>
                       <div>
                         <span class="money"
-                          >{{ userData.ftapExpectedSalaryBottom }} -
-                          {{ userData.ftapExpectedSalaryTop }}</span
-                        >
+                          >{{ userData.ftapExpectedSalaryBottom }}
+                          <!-- {{ userData.ftapExpectedSalaryTop }} -->
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -198,7 +198,7 @@
             >{{ Copy }}</el-button
           >
         </span>
-      </el-dialog>
+      </el-dialog>  
     </div>
 
     <div class="wechat">
@@ -769,10 +769,10 @@ export default {
 }
 .lastOne {
   border: none;
-  padding-bottom: 110px;
+  padding-bottom: 20px;
 }
 .lastOne > div > p {
-  padding-bottom: 32px;
+  padding-bottom: 22px;
 }
 .lastOne > div > div > p {
   font-size: 24px;
@@ -850,9 +850,9 @@ export default {
 .workContent {
   background: rgb(242, 245, 249);
 }
-.workContentBox > div:first-child {
+/* .workContentBox > div:first-child {
   padding-top: 24px;
-}
+} */
 .workContentBox > div > span {
   font-size: 18px;
   font-weight: 700;
@@ -932,7 +932,7 @@ export default {
   margin-bottom: 49px;
 }
 .education > div:nth-child(2) {
-  margin-bottom: 41px;
+  margin-bottom: 20px;
 }
 .education > div > span:first-child {
   margin-right: 50px;
@@ -984,5 +984,8 @@ export default {
 }
 .phone >>> .el-dialog__headerbtn {
   top: 24px;
+}
+.phone >>> .el-textarea__inner {
+  background: none;
 }
 </style>

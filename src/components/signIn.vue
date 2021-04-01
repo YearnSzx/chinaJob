@@ -178,7 +178,7 @@ export default {
                     show: _this.show,
                     userid: _this.userId,
                   }
-                  this.$router.push({ name: 'UserRelease' })
+                  this.$router.push({ name: 'ApplicationModify' })
                   this.$emit('signinSuccess', data)
                   sessionStorage.setItem("userName", _this.userName)
                 }
@@ -243,7 +243,7 @@ export default {
                 // console.log(res2)
                 let leng = res2.data.root.length - 1
                 // if (res2.data.root == '') {
-                //     this.$router.push({name:'JgUserRelease'})
+                //     this.$router.push({name:'JgapplicationModify'})
                 // }
                 // let data = {
                 //     name :res2.data.root[leng].orreOrgNameEn,
@@ -269,7 +269,7 @@ export default {
                     show: _this.show,
                     userid: _this.userId,
                   }
-                  this.$router.push({ name: 'JgUserRelease' })
+                  this.$router.push({ name: 'JgapplicationModify' })
                   this.$emit('signinSuccess', data)
                   sessionStorage.setItem("userName", _this.userName)
                 }

@@ -106,7 +106,8 @@ export default {
       autoUp: false,
       imageFileList: [],
       headImg: '',
-      userRoleId: ''
+      userRoleId: '',
+      num: 0
     }
   },
   methods: {
@@ -136,7 +137,7 @@ export default {
         }
       }, 5000);
       cMessage(data).then((res) => {
-        // console.log(res)
+        console.log(res)
         if (res.data.success) {
           clearTimeout(timeOut)
           if (sessionStorage.getItem('changeChinese') == 'false') {
@@ -150,6 +151,7 @@ export default {
               type: 'success'
             });
           }
+          this.$emit('headeruserimg', this.num++)
           // this.$router.replace({path:'/whiteHouse'}) // 白宫中转
         } else {
           if (sessionStorage.getItem('changeChinese') == 'false') {
@@ -206,7 +208,7 @@ export default {
       let uid = sessionStorage.getItem('userId')
       // console.log(this.imageFileList)
       this.headImg = 'http://admin.hichinajob.com' + response.path
-      this.$emit('headerUserImg', this.headImg)
+      // this.$emit('headerUserImg', this.headImg)
       // console.log(this.headImgPath)
       // console.log(file)
       // console.log(fileList)
@@ -267,13 +269,6 @@ export default {
         sub: '确认修改'
       }
     }
-  },
-  mounted() {
-    // userMessageList2(Number(sessionStorage.getItem('userId'))).then(res=>{
-    // console.log(res)
-
-
-    // })
   },
   watch: {
     changeCNorEN: {

@@ -81,11 +81,8 @@
           <div class="FB_mt_personMessage">
             <p>{{ tData.tName }}:{{ item.ftapTeacherName }}</p>
             <span>{{ tData.tCountry }}:{{ item.ftapCountry }}</span>
-            <p>{{ tData.hopePay }}:</p>
             <p>
-              ¥{{ item.ftapExpectedSalaryBottom }}--{{
-                item.ftapExpectedSalaryTop
-              }}
+              {{ tData.hopePay }}:¥{{ item.ftapExpectedSalaryBottom }}/month
             </p>
           </div>
         </li>
@@ -227,15 +224,10 @@ export default {
     setSize: function () {
       // 通过浏览器宽度(图片宽度)计算高度
       this.bannerHeight = (350 / 900) * this.screenWidth;
-      // console.log(this.screenWidth)
     },
     handleSizeChange(size) {
       this.pagesize = size;
-      // console.log(this.pagesize)  //每页下拉显示数据
-      // console.log(this.show1,this.show2,this.show3,this.show4)  //点击第几页
-
       if (this.show1 || this.show2 || this.show3 || this.show4) {
-        // console.log(123)
         let data = {
           ftapWorkType: this.show1,
           ftapCountryType: this.show2,
@@ -244,10 +236,7 @@ export default {
           page: this.currentPage,
           limit: this.pagesize
         }
-        // console.log(data)
-
         ftJobWanted2(data).then(res => {
-          // console.log(res)  
           this.allData = res.data.root
           this.allDataLength = res.data.totalSize
         })
@@ -258,7 +247,6 @@ export default {
           limit: this.pagesize
         }
         ftJobWanted(data).then((res) => {
-          // console.log(res.data.root)
           this.allData = res.data.root
           this.allDataLength = res.data.totalSize
         })
@@ -267,11 +255,7 @@ export default {
     },
     handleCurrentChange(currentPage) {
       this.currentPage = currentPage;
-      // console.log(this.currentPage)  //点击第几页
-      // console.log(this.show1,this.show2,this.show3,this.show4)  //点击第几页
-
       if (this.show1 || this.show2 || this.show3 || this.show4) {
-        // console.log(123)
         let data = {
           ftapWorkType: this.show1,
           ftapCountryType: this.show2,
@@ -280,29 +264,19 @@ export default {
           page: this.currentPage,
           limit: this.pagesize
         }
-        // console.log(data)
-
         ftJobWanted2(data).then(res => {
-          // console.log(res)
           this.allData = res.data.root
           this.allDataLength = res.data.totalSize
-
-
         })
       } else {
-        // console.log(456)
         let data = {
           page: this.currentPage,
           limit: this.pagesize
         }
         ftJobWanted(data).then((res) => {
-          // console.log(res.data.root)
           this.allData = res.data.root
-          // this.allDataLength = res.data.totalSize
-
         })
       }
-
     },
     column1(num) {
       this.show1 = num
@@ -315,10 +289,8 @@ export default {
         page: this.currentPage,
         limit: this.pagesize
       }
-      // console.log(data)
 
       ftJobWanted2(data).then(res => {
-        // console.log(res)
         this.allData = res.data.root
         this.allDataLength = res.data.totalSize
       })
@@ -335,9 +307,7 @@ export default {
         page: this.currentPage,
         limit: this.pagesize
       }
-      // console.log('总数据'+data)
       ftJobWanted2(data).then(res => {
-        // console.log(res)
         this.allData = res.data.root
         this.allDataLength = res.data.totalSize
       })
@@ -353,9 +323,7 @@ export default {
         page: this.currentPage,
         limit: this.pagesize
       }
-      // console.log(data)
       ftJobWanted2(data).then(res => {
-        // console.log(res)
         this.allData = res.data.root
         this.allDataLength = res.data.totalSize
       })
@@ -371,19 +339,14 @@ export default {
         page: this.currentPage,
         limit: this.pagesize
       }
-      // console.log(data)
       ftJobWanted2(data).then(res => {
-        // console.log(res)
         this.allData = res.data.root
         this.allDataLength = res.data.totalSize
       })
     },
     goToTeachMessage(item) {
-      // console.log(item)
       sessionStorage.setItem('ftapId', item.ftapId)
-      // console.log(item.ftapId)
-      this.$router.push({ name: 'TeachJieShao' })
-      // this.$emit('gotoJieShao',1)
+      this.$router.push({ name: 'TeacherInformation' })
     },
   },
 
@@ -395,10 +358,6 @@ export default {
       this.screenWidth = window.innerWidth;
       this.setSize();
     };
-
-    // ftApplyList().then((res)=>{
-    // console.log(res)
-    // })
   },
   watch: {
     changeCNorEN: {
@@ -550,7 +509,6 @@ img {
 .headImage {
   width: 174px;
   height: 168px;
-  background: #cfcfcf;
   display: inline-block;
   margin-bottom: 30px;
   margin-top: 78px;
@@ -558,7 +516,7 @@ img {
 .FB_mt_personMessage {
   width: 174px;
   text-align: left;
-  font-size: 18px;
+  font-size: 14px;
   color: #0e0e0e;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -567,7 +525,7 @@ img {
 .FB_mt_personMessage > p,
 .FB_mt_personMessage > span {
   line-height: 30px;
-  font-size: 18px;
+  font-size: 14px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -599,7 +557,6 @@ img {
 .headImage {
   width: 174px;
   height: 168px;
-  background: #cfcfcf;
   display: inline-block;
   margin-bottom: 14px;
   margin-top: 47px;

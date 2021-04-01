@@ -195,7 +195,7 @@ export default {
     goToJigouMessage(orreId) {
       // console.log(orreId)
       sessionStorage.setItem('orreId', orreId)
-      this.$router.push({ name: 'JigouJieShao' })
+      this.$router.push({ name: 'PositionDetails' })
       this.$emit('gotoJieShao', 1)
     },
     column1(num) {
@@ -415,14 +415,14 @@ image {
   box-sizing: border-box;
 }
 .jobChoice {
-  max-width: 1200px;
+  max-width: 1120px;
   box-sizing: border-box;
   margin: 0 auto;
   padding-top: 66px;
 }
 .jobChoiceBox > div {
   display: inline-block;
-  margin-bottom: 82px;
+  margin-bottom: 78px;
 }
 .jobChoiceBox > .btn {
   cursor: pointer;
@@ -473,7 +473,7 @@ image {
   max-width: 1200px;
   box-sizing: border-box;
   margin: 0 auto;
-  padding-top: 82px;
+  padding-top: 35px;
 }
 .jfcBox > ul {
   width: 100%;
@@ -498,7 +498,7 @@ image {
   box-sizing: border-box;
   vertical-align: middle;
   position: relative;
-  margin-right: 50px;
+  margin-right: 46px;
 }
 .userMsg > div {
   display: inline-block;

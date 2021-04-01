@@ -13,11 +13,19 @@
               <div class="formBox">
                 <el-form ref="form" :model="form" :rules="rules">
                   <el-form-item prop="name">
-                    <div class="msgContentTitle1 must">{{ mTitle.name }}</div>
-                    <el-input v-model="form.name"></el-input>
+                    <div class="msgContentTitle1 must">
+                      {{ mTitle.name }}
+                    </div>
+                    <el-input
+                      v-model="form.name"
+                      maxlength="20"
+                      show-word-limit
+                    ></el-input>
                   </el-form-item>
                   <el-form-item prop="sex">
-                    <div class="msgContentTitle2 must">{{ mTitle.sex }}</div>
+                    <div class="msgContentTitle2 must">
+                      {{ mTitle.sex }}
+                    </div>
                     <el-radio-group v-model="form.sex">
                       <el-radio label="1">{{ male }}</el-radio>
                       <el-radio label="2">{{ female }}</el-radio>
@@ -66,7 +74,11 @@
                       {{ mTitle.workplace }}
                     </div>
                     <el-radio-group v-model="form.workplace">
-                      <el-radio label="1">{{ mTitle.online }}</el-radio>
+                      <el-radio
+                        label="1"
+                        style="display: block; margin-bottom: 16px"
+                        >{{ mTitle.online }}</el-radio
+                      >
                       <el-radio label="2">{{ mTitle.onChina }}</el-radio>
                     </el-radio-group>
                   </el-form-item>
@@ -74,23 +86,46 @@
                     <div class="msgContentTitle1 must">
                       {{ mTitle.ChineseStandard }}
                     </div>
-                    <el-radio-group v-model="form.ChineseStandard">
-                      <!-- 不会 -->
-                      <el-radio label="0">{{
-                        mTitle.ChineseStanNone
-                      }}</el-radio>
-                      <!-- 一点点 -->
-                      <el-radio label="1">{{
-                        mTitle.ChineseStanLittle
-                      }}</el-radio>
-                      <!-- 基本交流 -->
-                      <el-radio label="2">{{
-                        mTitle.ChineseStanNormal
-                      }}</el-radio>
-                      <!-- 流利 -->
-                      <el-radio label="3" style="margin-top: 20px">{{
-                        mTitle.ChineseStanGood
-                      }}</el-radio>
+                    <el-radio-group
+                      v-model="form.ChineseStandard"
+                      style="width: 100%"
+                    >
+                      <el-row>
+                        <el-col :span="12">
+                          <div>
+                            <!-- 不会 -->
+                            <el-radio label="0">
+                              {{ mTitle.ChineseStanNone }}
+                            </el-radio>
+                          </div>
+                        </el-col>
+                        <el-col :span="6" :offset="2">
+                          <div>
+                            <!-- 一点点 -->
+                            <el-radio label="1">
+                              {{ mTitle.ChineseStanLittle }}
+                            </el-radio>
+                          </div>
+                        </el-col>
+                      </el-row>
+                      <el-row style="margin-top: 15px">
+                        <el-col :span="12">
+                          <div>
+                            <!-- 基本交流 -->
+                            <el-radio label="2">
+                              {{ mTitle.ChineseStanNormal }}
+                            </el-radio>
+                          </div>
+                        </el-col>
+                        <el-col :span="6" :offset="2">
+                          <div>
+                            <!-- 流利 -->
+                            <el-radio label="3">
+                              {{ mTitle.ChineseStanGood }}
+                            </el-radio>
+                          </div>
+                        </el-col>
+                      </el-row>
                     </el-radio-group>
                   </el-form-item>
                   <el-form-item prop="education">
@@ -111,18 +146,19 @@
                     <div class="msgContentTitle1 must">
                       {{ mTitle.hopePay }}
                     </div>
-                    <el-col class="line" :span="3">From</el-col>
-                    <el-col :span="9">
-                      <el-form-item prop="minPay">
+                    <el-col class="line" :span="3">¥</el-col>
+                    <!-- <el-col :span="9">
+                      <div prop="minPay">
                         <el-input v-model="form.minPay"></el-input>
-                      </el-form-item>
+                      </div>
                     </el-col>
-                    <el-col :span="3">to</el-col>
+                    <el-col :span="3">to</el-col> -->
                     <el-col :span="9">
-                      <el-form-item prop="maxPay">
+                      <div prop="maxPay">
                         <el-input v-model="form.maxPay"></el-input>
-                      </el-form-item>
+                      </div>
                     </el-col>
+                    <el-col class="line" :span="7">CNY/month</el-col>
                   </el-form-item>
 
                   <el-form-item prop="workVisa">
@@ -130,11 +166,18 @@
                       {{ mTitle.workVisa }}
                     </div>
                     <el-radio-group v-model="form.workVisa">
-                      <el-radio label="1">{{ mTitle.haveVisa }}</el-radio>
-                      <el-radio label="2" style="margin-top: 20px">{{
+                      <el-row>
+                        <el-col :span="12">
+                          <el-radio label="1">{{ mTitle.needVisa }}</el-radio>
+                        </el-col>
+                        <el-col :span="6" :offset="2">
+                          <el-radio label="2">{{ mTitle.haveVisa }}</el-radio>
+                        </el-col>
+                      </el-row>
+                      <el-radio label="3" style="margin-top: 20px">{{
                         mTitle.filesComplete
                       }}</el-radio>
-                      <el-radio label="3" style="margin-top: 20px">{{
+                      <el-radio label="4" style="margin-top: 20px">{{
                         mTitle.noVisa
                       }}</el-radio>
                     </el-radio-group>
@@ -299,6 +342,8 @@ export default {
         undergraduate: '',
         graduateStudent: '',
         doctor: '',
+
+        needVisa: '',
         haveVisa: '',
         filesComplete: '',
         noVisa: '',
@@ -354,14 +399,15 @@ export default {
         onChina: 'Work in China',
         ChineseStanNone: 'None',
         ChineseStanLittle: 'Little',
-        ChineseStanNormal: 'Normal',
-        ChineseStanGood: 'Good',
+        ChineseStanNormal: 'Basic communication',
+        ChineseStanGood: 'Fluent',
 
         juniorCollege: 'junior college',
         undergraduate: 'Undergraduate',
         graduateStudent: 'Master',
         doctor: 'Doctor',
 
+        needVisa: 'Visa required',
         haveVisa: 'I’m holding a work visa',
         filesComplete: 'All documents are complete',
         noVisa: 'Cannot apply for work visa',
@@ -400,6 +446,8 @@ export default {
         undergraduate: '本科',
         graduateStudent: '研究生',
         doctor: '博士',
+
+        needVisa: '需要办理签证',
         haveVisa: '已经有签证了',
         filesComplete: '所有文件已完成',
         noVisa: '不能申请工作签证',
@@ -451,7 +499,7 @@ export default {
             ftapImage: this.headImgPath
           }
           this.autoUp = true
-          // console.log(data)
+          console.log(data)
 
           ftApply(data).then((res) => {
             // console.log(res)
@@ -481,7 +529,7 @@ export default {
               }
 
               setTimeout(() => {
-                this.$router.push({ path: '/userWork' })
+                this.$router.push({ path: '/application' })
               }, 700);
             } else {
               if (this.english = true) {
@@ -565,7 +613,7 @@ export default {
           education: res.data.root[0].ftapEducationBackground,         // 教育水平 ftapEducationBackground
           minPay: res.data.root[0].ftapExpectedSalaryBottom,            // 最低工资 ftapExpectedSalaryBottom
           maxPay: res.data.root[0].ftapExpectedSalaryTop,            // 最高工资 ftapExpectedSalaryTop
-          workVisa: res.data.root[0].ftapHaveVisa,          // 工作签证 ftapHaveVisa
+          workVisa: String(res.data.root[0].ftapHaveVisa),          // 工作签证 ftapHaveVisa
           workExp: res.data.root[0].ftapWorkExperience,           // 工作经验 ftapWorkExperience 
           selfItd: res.data.root[0].ftapSelfIntroduction            // 自我介绍 tapSelfIntroduction 
         }
@@ -612,12 +660,14 @@ export default {
             onChina: 'Work in China',
             ChineseStanNone: 'None',
             ChineseStanLittle: 'Little',
-            ChineseStanNormal: 'Normal',
-            ChineseStanGood: 'Good',
+            ChineseStanNormal: 'Basic communication',
+            ChineseStanGood: 'Fluent',
             juniorCollege: 'junior college',
             undergraduate: 'Undergraduate',
             graduateStudent: 'Master',
             doctor: 'Doctor',
+
+            needVisa: 'Visa required',
             haveVisa: 'I’m holding a work visa',
             filesComplete: 'All documents are complete',
             noVisa: 'Cannot apply for work visa',
@@ -656,6 +706,8 @@ export default {
             undergraduate: '本科',
             graduateStudent: '研究生',
             doctor: '博士',
+
+            needVisa: 'Visa required',
             haveVisa: '已经有签证了',
             filesComplete: '所有文件已完成',
             noVisa: '不能申请工作签证',
@@ -712,14 +764,14 @@ export default {
   margin-bottom: 60px;
 }
 .msgContentTitle1 {
-  font-size: 26px;
+  font-size: 22px;
   color: #080808;
-  margin-bottom: 11px;
+  margin-bottom: 15px;
 }
 .msgContentTitle2 {
-  font-size: 26px;
+  font-size: 22px;
   color: #080808;
-  margin-bottom: 30px;
+  margin-bottom: 18px;
 }
 .line {
   text-align: left;
@@ -749,8 +801,8 @@ export default {
   font-size: 25px;
 }
 .formBox >>> .el-radio__label {
-  font-size: 24px;
-  padding-left: 34px;
+  font-size: 20px;
+  padding-left: 14px;
   vertical-align: middle;
 }
 .el-radio__inner {
@@ -758,6 +810,11 @@ export default {
   height: 24px;
 }
 .el-col-3 {
+  line-height: 55px;
+  font-size: 20px;
+  text-align: center;
+}
+.el-col-7 {
   line-height: 55px;
   font-size: 20px;
   text-align: center;
@@ -781,5 +838,9 @@ export default {
 .must::before {
   content: "*";
   color: red;
+}
+
+.formBox >>> .el-form-item__content {
+  line-height: 20px;
 }
 </style>

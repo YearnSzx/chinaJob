@@ -17,7 +17,7 @@
           @changeLanguage="changeCorE"
           @gotoJieShao="changeHead"
           @userWorkData="getUserDataChange"
-          @headerUserImg="headUserImg"
+          @headeruserimg="headUserImg"
           @jigouWorkData="getJigouDataChange"
         />
       </el-main>

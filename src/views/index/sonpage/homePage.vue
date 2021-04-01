@@ -32,7 +32,8 @@
                 <span
                   >¥{{ item.orreExpectedSalaryBottom }}--¥{{
                     item.orreExpectedSalaryTop
-                  }}</span
+                  }}
+                  month</span
                 >
               </div>
               <div class="RMBox_sBox_bot">
@@ -53,7 +54,11 @@
     <!-- 最新求职 -->
     <div id="findJob">
       <div class="findJob">
-        <div class="findJobBg" :class="{ findJobBg2: changeCNorEN == 'false' }">
+        <div
+          class="findJobBg"
+          :class="{ findJobBg2: changeCNorEN == 'false' }"
+          style="font-size: 0"
+        >
           <img :src="findJobBgImg" alt="" />
           <div class="motherTongue">
             <img :src="motherTongueImg" alt="" />
@@ -82,11 +87,8 @@
               <div class="FB_mt_personMessage">
                 <p>{{ tData.tName }}:{{ item.ftapTeacherName }}</p>
                 <span>{{ tData.tCountry }}:{{ item.ftapCountry }}</span>
-                <p>{{ tData.hopePay }}:</p>
                 <p>
-                  ¥{{ item.ftapExpectedSalaryBottom }}-¥{{
-                    item.ftapExpectedSalaryTop
-                  }}
+                  {{ tData.hopePay }}:¥{{ item.ftapExpectedSalaryBottom }}/month
                 </p>
               </div>
             </li>
@@ -111,11 +113,8 @@
               <div class="FB_ot_personMessage">
                 <p>{{ tData.tName }}:{{ item.ftapTeacherName }}</p>
                 <span>{{ tData.tCountry }}:{{ item.ftapCountry }}</span>
-                <p>{{ tData.hopePay }}:</p>
                 <p>
-                  ¥{{ item.ftapExpectedSalaryBottom }}-¥{{
-                    item.ftapExpectedSalaryTop
-                  }}
+                  {{ tData.hopePay }}:¥{{ item.ftapExpectedSalaryBottom }}/month
                 </p>
               </div>
             </li>
@@ -136,7 +135,7 @@ export default {
   props: ['changeCNorEN'],
   data() {
     return {
-      active: false,
+      active: false,  
       findJobBgImg: require("../../../assets/最新求职.jpg"),
       motherTongueImg: require('../../../assets/母语国家.jpg'),
       ohterTongueImg: require('../../../assets/其他国家.jpg'),
@@ -184,13 +183,13 @@ export default {
 
     goToTeachMessage(ftapId) {
       sessionStorage.setItem('ftapId', ftapId)
-      this.$router.push({ name: 'TeachJieShao' })
+      this.$router.push({ name: 'TeacherInformation' })
       this.$emit('gotoJieShao', 1)
     },
     goToJigouMessage(orreId) {
       // console.log(orreId)
       sessionStorage.setItem('orreId', orreId)
-      this.$router.push({ name: 'JigouJieShao' })
+      this.$router.push({ name: 'PositionDetails' })
       this.$emit('gotoJieShao', 1)
     }
   },
@@ -215,7 +214,7 @@ export default {
       this.tData = {
         tName: 'Name',
         tCountry: 'Nationality',
-        hopePay: 'Salary Expectation'
+        hopePay: 'Salary'
       }
       this.redirect = require("../../../assets/EHome/img1.png")
       this.findJobBgImg = require("../../../assets/EHome/img2.png")
@@ -280,7 +279,7 @@ export default {
         this.tData = {
           tName: 'Name',
           tCountry: 'Nationality',
-          hopePay: 'Salary Expectation'
+          hopePay: 'Salary'
         }
         if (newL == 'false') {
           this.redirect = require("../../../assets/EHome/img1.png")
@@ -346,7 +345,7 @@ img {
 .recruitImg2 > img {
   width: 838px;
   height: 139px;
-  padding: 68px 0 90px 0;
+  padding: 68px 0 60px 0;
 }
 
 .recruitMessage {
@@ -445,7 +444,7 @@ img {
   width: 838px;
   height: 139px;
   padding-top: 180px;
-  padding-bottom: 75px;
+  padding-bottom: 49px;
 }
 .motherTongue > img {
   /* width: 410px;
@@ -469,7 +468,7 @@ img {
 .FB_mt_personMessage {
   width: 174px;
   text-align: left;
-  font-size: 18px;
+  font-size: 14px;
   color: #0e0e0e;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -519,7 +518,6 @@ img {
 .headImage {
   max-width: 174px;
   height: 156px;
-  background: #cfcfcf;
   display: inline-block;
   margin-bottom: 14px;
   margin-top: 47px;
@@ -527,7 +525,7 @@ img {
 }
 .FB_ot_personMessage {
   text-align: left;
-  font-size: 18px;
+  font-size: 14px;
   color: #0e0e0e;
   width: 174px;
 }

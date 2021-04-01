@@ -4,13 +4,13 @@
       <div class="USBox">
         <div>
           <div class="usTitle">
-            <span> {{ text.dMessage }} </span>
+            <span>{{ text.details }}</span>
           </div>
           <div class="usContent">
             <div class="usContentBox">
               <div class="userMessage">
                 <div class="msgTitle">
-                  <p>{{ text.details }}</p>
+                  <p>{{ text.dMessage }}</p>
                 </div>
               </div>
 
@@ -30,7 +30,7 @@
                 :key="index"
               >
                 <div>
-                  <p>{{ item.orrePosition }}</p>
+                  <p>{{ item.ftapTeacherName }}</p>
                 </div>
                 <div class="UOperation">
                   <div class="modifyinfo">
@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import { orreRecruit4, orgApplyList, delOrgList, userMessageList2 } from '@/utils/index'  // 登陆接口
+import { orreRecruit, ftApplyList, delApplyList, userMessageList2 } from '@/utils/index'
 export default {
   props: ['changeCNorEN'],
   data() {
@@ -59,8 +59,8 @@ export default {
       nicheng: '',
       userName: '',
       userPassword: '',
-      del: '',
       modify: '',
+      del: '',
       jobWanted: [],
       text: {
         details: '',
@@ -73,61 +73,60 @@ export default {
   methods: {
     toModifInfo: function (item) {
       // console.log(item)
-      this.$router.push({ name: 'JgUserRelease' })
-      sessionStorage.setItem('clearData', true)
-      this.$emit('jigouWorkData', item)
+      this.$router.push({ name: 'ApplicationModify' })
+      this.$emit('userWorkData', item)
     },
     toDelInfo: function (item) {
-      // console.log(item)
+      // console.log(item.ftapId)
       let data = {
-        id: item.orreId
+        id: item.ftapId
       }
-      delOrgList(data).then(res => {
+      delApplyList(data).then(res => {
         // console.log(res)
         if (res.data.success) {
-          // 删除成功后刷新
-          let uid = {
-            orreUserId: Number(sessionStorage.getItem('userId'))
+          let data = {
+            ftapUserId: Number(sessionStorage.getItem('userId'))
           }
-          // console.log(uid)
-          // 不分页查询招聘 根据id
-          orreRecruit4(uid).then(res => {
-            // console.log(res)
+          // console.log(data)
+          ftApplyList(data).then((res) => {
+            // console.log(res.data.root)
+            // this.jobWanted = Object.assign({},res.data.root)
             this.jobWanted = res.data.root
+            // console.log(this.jobWanted)
           })
         }
-
       })
     },
     goToAddData() {
-      this.$router.push({ name: 'JgUserRelease' })
+      this.$router.push({ name: 'ApplicationModify' })
     }
   },
   beforeCreate() {
-    this.$emit('gotoJieShao', 0)
+    this.$emit('gotoJieShao', 1)
   },
   created() {
-    let uid = {
-      orreUserId: Number(sessionStorage.getItem('userId'))
+    // console.log(sessionStorage.getItem('userId'))
+    let data = {
+      ftapUserId: Number(sessionStorage.getItem('userId'))
     }
-    // console.log(uid)
-    // 不分页查询招聘 根据id
-    orreRecruit4(uid).then(res => {
-      // console.log(res)
+    // console.log(data)
+    ftApplyList(data).then((res) => {
+      console.log(res)
       this.jobWanted = res.data.root
       if (this.jobWanted.length == 0) {
         this.noData = true
       }
     })
     userMessageList2(Number(sessionStorage.getItem('userId'))).then(res => {
-      // console.log(res.data.root[0])
-      this.$emit('headerUserImg', res.data.root[0].userHeadImg)
+      console.log(res)
+      let data = {
+        userRealName: res.data.root[0].userRealName,
+        userHeadImg: res.data.root[0].userHeadImg
+      }
+      this.$emit('headerUserImg', data)
     })
-    // orgApplyList().then(res=>{
-    // console.log(res)
 
-    // })
-    this.$emit('gotoJieShao', 1)
+    // this.$emit('gotoJieShao',1)
     this.changeCNorEN2 = sessionStorage.getItem('changeChinese')
     this.$emit("changeLanguage", this.changeCNorEN2)//在上传一次，就可以让值变动
     if (sessionStorage.getItem('changeChinese') == 'false') {
@@ -135,7 +134,7 @@ export default {
       this.modify = 'modify'
       this.text = {
         details: 'Job details',
-        dMessage: 'Published position information',
+        dMessage: 'Published job search information',
         addData: 'No recruitment information, click',
         addLink: 'Link',
         addData2: 'to add recruitment information'
@@ -145,15 +144,14 @@ export default {
       this.del = '删除'
       this.modify = '修改'
       this.text = {
-        details: '职位',
-        dMessage: '已经发布的职位信息',
-        addData: '暂无招聘信息点击',
+        details: '求职',
+        dMessage: '已经发布的求职信息',
+        addData: '暂无求职信息点击',
         addLink: '链接',
-        addData2: '添加招聘信息'
+        addData2: '添加求职信息'
       }
     }
   },
-
   watch: {
     changeCNorEN: {
       handler(newL, oldL) {
@@ -173,11 +171,11 @@ export default {
           this.del = '删除'
           this.modify = '修改'
           this.text = {
-            details: '职位',
-            dMessage: '已经发布的职位信息',
-            addData: '暂无招聘信息点击',
+            details: '求职',
+            dMessage: '已经发布的求职信息',
+            addData: '暂无求职信息点击',
             addLink: '链接',
-            addData2: '添加招聘信息'
+            addData2: '添加求职信息'
           }
         }
       }
@@ -192,7 +190,7 @@ export default {
         }
       }
     }
-  }
+  },
 }
 
 </script>
@@ -223,7 +221,6 @@ export default {
   width: 100%;
   display: inline-block;
   font-size: 0;
-  position: relative;
 }
 
 .usContentBox > div {
@@ -245,6 +242,7 @@ export default {
   box-sizing: border-box;
   display: inline-block;
   color: #717171;
+  position: relative;
 }
 .userMessage > div > p {
   font-size: 24px;

@@ -198,7 +198,7 @@
             >{{ Copy }}</el-button
           >
         </span>
-      </el-dialog>  
+      </el-dialog>
     </div>
 
     <div class="wechat">

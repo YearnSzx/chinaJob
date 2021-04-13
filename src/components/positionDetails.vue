@@ -116,9 +116,6 @@
                   <div class="workPlace lastOne">
                     <div>
                       <p>{{ EnglishData.OtherBenefits }}</p>
-                      <!-- <ul class="fuli">
-                        {{orreData.orreOtherWelfare}}
-                      </ul> -->
                       <el-input
                         type="textarea"
                         :autosize="{ minRows: 6, maxRows: 8 }"
@@ -683,13 +680,6 @@ export default {
 }
 .workPlace > div > .money {
   font-weight: bold;
-}
-.fuli > li {
-  display: inline-block;
-  padding: 7px 16px;
-  border: 1px solid #dfdfdf;
-  border-radius: 23px;
-  margin-right: 38px;
 }
 
 /* 特殊 */

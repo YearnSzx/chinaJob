@@ -120,7 +120,7 @@ export default {
     userMessageList2(Number(sessionStorage.getItem('userId'))).then(res => {
       console.log(res)
       let data = {
-        userRealName: res.data.root[0].userRealName,
+        // userRealName: res.data.root[0].userRealName,
         userHeadImg: res.data.root[0].userHeadImg
       }
       this.$emit('headerUserImg', data)

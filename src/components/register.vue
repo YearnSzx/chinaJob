@@ -1,8 +1,5 @@
 <template>
   <div id="register">
-    <!-- <router-link to="/teach">asdasdasdasd</router-link>
-    <router-link to="/jigou">dddfsdfsfsdfdsfdd</router-link>
-    <router-view></router-view> -->
     <div class="register" :class="{ register2: changeCNorEN2 == 'false' }">
       <h2>{{ teachReg.freeReg }}</h2>
       <div class="choice">
@@ -21,7 +18,7 @@
           :rules="rules2()"
           label-position="left"
         >
-          <div class="must deepCss">
+          <div class="must deepCss">  
             <el-form-item :label="teachReg.JPNumber" prop="jigouPhoneNumber">
               <el-input
                 v-model="jigouData.jigouPhoneNumber"

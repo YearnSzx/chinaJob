@@ -125,17 +125,14 @@
   </div>
 </template>
 
-
-
 <script>
-
 import { ftJobWanted, ftJobWanted2, orreRecruit, userMessageList } from '@/utils/index'
 export default {
   name: "Banner",
   props: ['changeCNorEN'],
   data() {
     return {
-      active: false,  
+      active: false,
       findJobBgImg: require("../../../assets/最新求职.jpg"),
       motherTongueImg: require('../../../assets/母语国家.jpg'),
       ohterTongueImg: require('../../../assets/其他国家.jpg'),
@@ -165,7 +162,6 @@ export default {
     setSize: function () {
       // 通过浏览器宽度(图片宽度)计算高度
       this.bannerHeight = (350 / 900) * this.screenWidth;
-      // console.log(this.screenWidth)
     },
     selectStyle(item) {
       var _this = this;
@@ -187,7 +183,6 @@ export default {
       this.$emit('gotoJieShao', 1)
     },
     goToJigouMessage(orreId) {
-      // console.log(orreId)
       sessionStorage.setItem('orreId', orreId)
       this.$router.push({ name: 'PositionDetails' })
       this.$emit('gotoJieShao', 1)
@@ -204,9 +199,6 @@ export default {
     // 控制中英文的数据
     this.changeCNorEN2 = sessionStorage.getItem('changeChinese')
     this.$emit("changeLanguage", this.changeCNorEN2)//在上传一次，就可以让值变动
-    // this.changeCNorEN = sessionStorage.getItem('changeChinese')
-    // console.log(this.changeCNorEN2)
-    // console.log(this.orreNameEn)
     if (this.orreNameEn === null || this.orreNameEn === '' || this.orreNameEn === [] || this.orreNameEn === 'null') {
       this.orreNameEn = 'false'
     }
@@ -226,10 +218,10 @@ export default {
         tCountry: '国籍',
         hopePay: '期望薪资'
       }
-      this.redirect = require("../../../assets/最新招聘.png"),
-        this.findJobBgImg = require("../../../assets/最新求职.png"),
-        this.motherTongueImg = require('../../../assets/母语国家.png'),
-        this.ohterTongueImg = require('../../../assets/其他国家.png')
+      this.redirect = require("../../../assets/最新招聘.png")
+      this.findJobBgImg = require("../../../assets/最新求职.png")
+      this.motherTongueImg = require('../../../assets/母语国家.png')
+      this.ohterTongueImg = require('../../../assets/其他国家.png')
     }
     let data = {
       page: 1,
@@ -244,7 +236,6 @@ export default {
       ftapCountryType: 1
     }
     ftJobWanted2(data2).then((res) => {
-      // console.log(res)
       this.motherTongue = res.data.root
     })
 
@@ -254,7 +245,6 @@ export default {
       ftapCountryType: 2
     }
     ftJobWanted2(data3).then((res) => {
-      // console.log(res)
       this.motherTongue2 = res.data.root
     })
   },
@@ -292,18 +282,16 @@ export default {
             tCountry: '国籍',
             hopePay: '期望薪资'
           }
-          this.redirect = require("../../../assets/最新招聘.png"),
-            this.findJobBgImg = require("../../../assets/最新求职.png"),
-            this.motherTongueImg = require('../../../assets/母语国家.png'),
-            this.ohterTongueImg = require('../../../assets/其他国家.png')
+          this.redirect = require("../../../assets/最新招聘.png")
+          this.findJobBgImg = require("../../../assets/最新求职.png")
+          this.motherTongueImg = require('../../../assets/母语国家.png')
+          this.ohterTongueImg = require('../../../assets/其他国家.png')
         }
       }
     }
   }
 };
 </script>
-
-
 
 <style scoped>
 .active {

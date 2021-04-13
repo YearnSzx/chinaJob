@@ -374,11 +374,9 @@ export default {
         this.isDisable = false
       }, 1000)
       signOut().then((res) => {
-        // console.log(res.data.success)
         this.userImgUrl = ''  //清空照片
         if (res.data.success) {
           this.activeIndex = '1'
-          // console.log(this.activeIndex)
           sessionStorage.setItem('userName', '')
           // 登陆注册出现
           this.rAndSshow = !this.rAndSshow
@@ -399,9 +397,8 @@ export default {
           this.messageBox = false
 
           // 清除数据
-          // localStorage.clear();
+          // localStorage.clear();h
           sessionStorage.clear()
-          // console.log(this.changeEngAndChina)
           sessionStorage.setItem('changeChinese', this.changeEngAndChina)
           sessionStorage.setItem('userHeadImg', '')
         }
@@ -413,8 +410,8 @@ export default {
       this.messageBox = true
     },
     outMessageBox2: function () {
-      this.inMessageBox = false
-      this.messageBox = false
+      this.inMessageBox = false;
+      this.messageBox = false;
     },
     showMessageBox: function () {
       this.messageBox = true
@@ -438,13 +435,11 @@ export default {
     // 转换为中文
     Chinese: function () {
       sessionStorage.setItem('changeChinese', true)
-      // console.log('切换为中文'+sessionStorage.getItem('changeChinese'))
       this.changeEngAndChina = sessionStorage.getItem('changeChinese')
       this.$emit("changeLanguage", this.changeEngAndChina)
     },
     English: function () {
       sessionStorage.setItem('changeChinese', false)
-      // console.log('切换为英文'+sessionStorage.getItem('changeChinese'))
       this.changeEngAndChina = sessionStorage.getItem('changeChinese')
       this.$emit("changeLanguage", this.changeEngAndChina)
     },
@@ -487,51 +482,6 @@ export default {
         }
       }
     })
-    // if (sessionStorage.getItem('userShow') == '1') {
-    //   let uid = {
-    //     ftapUserId:sessionStorage.getItem('userId')
-    //   }
-    //   userMessageList2(Number(sessionStorage.getItem('userId'))).then(res=>{
-    //     // userHeadImg 头像地址
-    //     console.log(res)
-
-    //     if (res.data.root[0].userHeadImg == 'null' || res.data.root[0].userHeadImg == null || res.data.root[0].userHeadImg == '' ) {
-    //       this.userImgUrl = require("@/assets/logo.png");
-    //     }else{
-    //       this.userImgUrl = res.data.root[0].userHeadImg
-    //     }
-
-    //   })
-    // }else{
-    //   let uid = {
-    //     orreUserId:Number(sessionStorage.getItem('userId'))
-    //   }
-    //   orreRecruit4(uid).then(res=>{
-    //     console.log(res.data.root)
-    //     // if (res.data.root == []) {
-    //     //   this.userImgUrl = require("@/assets/logo22.png");
-    //     // }else{
-    //     //   if (res.data.root[0].orreLogo == 'null' || res.data.root[0].orreLogo == null || res.data.root[0].orreLogo == '' ) {
-    //     //     this.userImgUrl = require("@/assets/logo.png");
-    //     //   }else{
-    //     //     this.userImgUrl = res.data.root[0].orreLogo
-    //     //   }
-    //     // }
-    //     if(res.data.root&&res.data.root.length>0){
-    //       let obj = res.data.root[0]
-    //       if(obj.orreLogo!==null&&obj.orreLogo!==''&&obj!==''){
-    //         this.userImgUrl =obj.orreLogo
-    //         console.log(obj)
-    //       }else{
-    //         this.userImgUrl = require("@/assets/logo.png");
-    //       }
-    //     }else{
-    //       this.userImgUrl = require("@/assets/logo22.png");
-    //     }
-
-    //   })
-    // }
-
 
     let userName = sessionStorage.getItem('userName')
     let userShow = sessionStorage.getItem('userShow')
@@ -713,21 +663,16 @@ export default {
     },
     changeHeadBg: {
       handler(newNum, oldNum) {
-        // console.log(newNum,oldNum)
         if (newNum == 1) {
-          // console.log(newNum,oldNum+'top')
           this.bgShow = Number(newNum)
         } else {
-          // console.log(newNum,oldNum+'bot')
           this.bgShow = Number(newNum)
         }
       }
     },
     changeHeadImg: {
       handler(newImg, oldImg) {
-        // this.userImgUrl = this.changeHeadImg
-        // this.userName = this.changeHeadImg.userRealName
-        // console.log(this.changeHeadImg)
+        this.userImgUrl = this.changeHeadImg
         console.log(newImg)
         if (newImg || newImg == 0) {
           userMessageList2(Number(sessionStorage.getItem('userId'))).then(res => {

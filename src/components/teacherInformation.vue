@@ -411,8 +411,6 @@ export default {
     // 控制中英文的数据
     this.changeCNorEN2 = sessionStorage.getItem('changeChinese')
     this.$emit("changeLanguage", this.changeCNorEN2)//在上传一次，就可以让值变动
-    // this.changeCNorEN = sessionStorage.getItem('changeChinese')
-    // console.log(this.changeCNorEN2)
     if (sessionStorage.getItem('changeChinese') == 'false') {
       this.weChatImg = require('../assets/wechat/微信Eng.png'),
         this.phoneImg = require('../assets/wechat/电话Eng.png'),
@@ -434,11 +432,11 @@ export default {
       this.wechat = {
         wechatTitle: 'Wechat',
         wechatMessage: 'Wechat',
-      },
-        this.phone = {
-          phoneTitle: 'Phone Number',
-          phoneMessage: '+86',
-        }
+      }
+      this.phone = {
+        phoneTitle: 'Phone Number',
+        phoneMessage: '+86',
+      }
       this.shareWechatTitle = 'Share to wechat'
 
 
@@ -466,15 +464,15 @@ export default {
           SelfIntroduction: '自我介绍',
         },
         this.ifMsgNone = '该外教/机构未设置电话/微信'
-      this.Copy = '复制',
-        this.wechat = {
-          wechatTitle: '微信',
-          wechatMessage: '微信号',
-        },
-        this.phone = {
-          phoneTitle: '电话',
-          phoneMessage: '+86',
-        }
+      this.Copy = '复制'
+      this.wechat = {
+        wechatTitle: '微信',
+        wechatMessage: '微信号',
+      }
+      this.phone = {
+        phoneTitle: '电话',
+        phoneMessage: '+86',
+      }
       this.shareWechatTitle = '分享到微信'
 
       if (this.userData.ftapCheineseLevel == '0') {
@@ -523,11 +521,11 @@ export default {
           this.wechat = {
             wechatTitle: 'Wechat',
             wechatMessage: 'Wechat',
-          },
-            this.phone = {
-              phoneTitle: 'Phone Number',
-              phoneMessage: '+86',
-            }
+          }
+          this.phone = {
+            phoneTitle: 'Phone Number',
+            phoneMessage: '+86',
+          }
           this.shareWechatTitle = 'Share to wechat'
 
           if (this.userData.ftapCheineseLevel == '不会') {
@@ -576,15 +574,15 @@ export default {
               phoneImg: require('../assets/wechat/电话.png'),
             }
           this.ifMsgNone = '该外教/机构未设置电话/微信'
-          this.Copy = '复制',
-            this.wechat = {
-              wechatTitle: '微信',
-              wechatMessage: '微信号',
-            },
-            this.phone = {
-              phoneTitle: '电话',
-              phoneMessage: '+86',
-            }
+          this.Copy = '复制'
+          this.wechat = {
+            wechatTitle: '微信',
+            wechatMessage: '微信号',
+          }
+          this.phone = {
+            phoneTitle: '电话',
+            phoneMessage: '+86',
+          }
           this.shareWechatTitle = '分享到微信'
 
 

@@ -138,18 +138,13 @@ export default {
         WorkMode: '工作方式：',
         IndustrialType: '行业类别：',
         SchoolType: '学校类别：',
-
         All: '不限',
-
         Online: '在线',
         Preschool: '学前教育',
         TrainingCentre: '培训机构',
-
-
         Offline: '来中国工作',
         OtherCountries: '中等教育',
         PublicSchool: '公立学校',
-
         HighSchool: '高等教育',
         InternationalSchool: '国际学校'
       },
@@ -166,7 +161,6 @@ export default {
     setSize: function () {
       // 通过浏览器宽度(图片宽度)计算高度
       this.bannerHeight = (350 / 900) * this.screenWidth;
-      // console.log(this.screenWidth)
     },
     handleSizeChange(size) {
       this.pagesize = size;
@@ -176,7 +170,6 @@ export default {
         limit: this.pagesize
       }
       orreRecruit(data).then((res) => {
-        // console.log(res.data.root)
         this.allData = res.data.root
       })
     },
@@ -188,12 +181,10 @@ export default {
         limit: this.pagesize
       }
       orreRecruit(data).then((res) => {
-        // console.log(res.data.root)
         this.allData = res.data.root
       })
     },
     goToJigouMessage(orreId) {
-      // console.log(orreId)
       sessionStorage.setItem('orreId', orreId)
       this.$router.push({ name: 'PositionDetails' })
       this.$emit('gotoJieShao', 1)
@@ -208,9 +199,7 @@ export default {
         page: this.currentPage,
         limit: this.pagesize
       }
-      // console.log(data)
       orreRecruit3(data).then((res) => {
-        // console.log(res) 
         this.allData = res.data.root
         this.allDataLength = res.data.totalSize
       })
@@ -225,9 +214,7 @@ export default {
         page: this.currentPage,
         limit: this.pagesize
       }
-      // console.log(data)
       orreRecruit3(data).then((res) => {
-        // console.log(res) 
         this.allData = res.data.root
         this.allDataLength = res.data.totalSize
       })
@@ -242,9 +229,7 @@ export default {
         page: this.currentPage,
         limit: this.pagesize
       }
-      // console.log(data)
       orreRecruit3(data).then((res) => {
-        // console.log(res) 
         this.allData = res.data.root
         this.allDataLength = res.data.totalSize
       })
@@ -259,7 +244,6 @@ export default {
       limit: this.pagesize
     }
     orreRecruit(data).then((res) => {
-      // console.log(res) 
       this.allData = res.data.root
       this.allDataLength = res.data.totalSize
     })
@@ -270,47 +254,36 @@ export default {
         WorkMode: 'Work Mode: ',
         IndustrialType: 'Industrial Type: ',
         SchoolType: 'School Type: ',
-
         All: 'All',
-
         Online: 'Online',
         Preschool: 'Pre-school',
         TrainingCentre: 'Training Centre',
-
-
         Offline: 'Work in China',
         OtherCountries: 'Middle School',
         PublicSchool: 'Public School',
-
         HighSchool: 'High School',
         InternationalSchool: 'International School'
       }
-      this.Salary = 'Salary',
-        this.WorkingCity = 'Working City'
+      this.Salary = 'Salary'
+      this.WorkingCity = 'Working City'
       this.nameEn = true
     } else {
-
       this.choiceBtnCN = {
         WorkMode: '工作方式：',
         IndustrialType: '行业类别：',
         SchoolType: '学校类别：',
-
         All: '不限',
-
         Online: '在线',
         Preschool: '学前教育',
         TrainingCentre: '培训机构',
-
-
         Offline: '来中国工作',
         OtherCountries: '中等教育',
         PublicSchool: '公立学校',
-
         HighSchool: '高等教育',
         InternationalSchool: '国际学校'
       }
-      this.Salary = '薪资',
-        this.WorkingCity = '工作城市'
+      this.Salary = '薪资'
+      this.WorkingCity = '工作城市'
       this.nameEn = false
     }
   },
@@ -332,46 +305,36 @@ export default {
             WorkMode: 'Work Mode: ',
             IndustrialType: 'Industrial Type: ',
             SchoolType: 'School Type: ',
-
             All: 'All',
-
             Online: 'Online',
             Preschool: 'Pre-school',
             TrainingCentre: 'Training Centre',
-
-
             Offline: 'Work in China',
             OtherCountries: 'Middle School',
             PublicSchool: 'Public School',
-
             HighSchool: 'High School',
             InternationalSchool: 'International School'
           }
-          this.Salary = 'Salary',
-            this.WorkingCity = 'Working City'
+          this.Salary = 'Salary'
+          this.WorkingCity = 'Working City'
           this.nameEn = true
         } else {
           this.choiceBtnCN = {
             WorkMode: '工作方式：',
             IndustrialType: '行业类别：',
             SchoolType: '学校类别：',
-
             All: '不限',
-
             Online: '在线',
             Preschool: '学前教育',
             TrainingCentre: '培训机构',
-
-
             Offline: '来中国工作',
             OtherCountries: '中等教育',
             PublicSchool: '公立学校',
-
             HighSchool: '高等教育',
             InternationalSchool: '国际学校'
           }
-          this.Salary = '薪资',
-            this.WorkingCity = '工作城市'
+          this.Salary = '薪资'
+          this.WorkingCity = '工作城市'
           this.nameEn = false
         }
       }
@@ -379,8 +342,6 @@ export default {
   }
 };
 </script>
-
-
 
 <style scoped>
 .active {

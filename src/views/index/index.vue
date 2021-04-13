@@ -17,7 +17,7 @@
           @changeLanguage="changeCorE"
           @gotoJieShao="changeHead"
           @userWorkData="getUserDataChange"
-          @headeruserimg="headUserImg"
+          @headerUserImg="headUserImg"
           @jigouWorkData="getJigouDataChange"
         />
       </el-main>
@@ -67,7 +67,7 @@ export default {
       this.jigouData = data
     },
     headUserImg(data) {
-      // console.log(data)
+      console.log(data)
       this.headerImg = data
       // console.log(this.headerImg)
     }

@@ -126,17 +126,13 @@ export default {
         Nationality: '国籍：',
         Gender: '性别：',
         WorkPermit: '工作签证：',
-
         All: '不限',
         Online: '在线',
         Offline: '来中国工作',
-
         NativeCountries: '母语国家',
         OtherCountries: '非母语国家',
-
         Male: '男',
         Female: '女',
-
         HoldWorkpermit: '已有工签',
         NewApplicant: '需要办理签证'
       },
@@ -162,7 +158,6 @@ export default {
       limit: this.pagesize
     }
     ftJobWanted(data).then((res) => {
-      // console.log(res)
       this.allData = res.data.root
       this.allDataLength = res.data.totalSize
     })
@@ -179,17 +174,13 @@ export default {
         Nationality: 'Nationality',
         Gender: 'Gender',
         WorkPermit: 'WorkPermit',
-
         All: 'All',
         Online: 'Online',
         Offline: 'Offline',
-
         NativeCountries: 'Native Countries',
         OtherCountries: 'Other Countries',
-
         Male: 'Male',
         Female: 'Female',
-
         HoldWorkpermit: 'Holding Workvisa',
         NewApplicant: 'New Applicant'
       }
@@ -204,17 +195,13 @@ export default {
         Nationality: '国籍',
         Gender: '性别',
         WorkPermit: '工作签证',
-
         All: '不限',
         Online: '在线',
         Offline: '来中国工作',
-
         NativeCountries: '母语国家',
         OtherCountries: '非母语国家',
-
         Male: '男',
         Female: '女',
-
         HoldWorkpermit: '已有工签',
         NewApplicant: '需要办理签证'
       }
@@ -289,7 +276,6 @@ export default {
         page: this.currentPage,
         limit: this.pagesize
       }
-
       ftJobWanted2(data).then(res => {
         this.allData = res.data.root
         this.allDataLength = res.data.totalSize
@@ -373,17 +359,13 @@ export default {
             Nationality: 'Nationality',
             Gender: 'Gender',
             WorkPermit: 'WorkPermit',
-
             All: 'All',
             Online: 'Online',
             Offline: 'Offline',
-
             NativeCountries: 'Native Countries',
             OtherCountries: 'Other Countries',
-
             Male: 'Male',
             Female: 'Female',
-
             HoldWorkpermit: 'Holding Workvisa',
             NewApplicant: 'New Applicant'
           }
@@ -398,17 +380,13 @@ export default {
             Nationality: '国籍',
             Gender: '性别',
             WorkPermit: '工作签证',
-
             All: '不限',
             Online: '在线',
             Offline: '来中国工作',
-
             NativeCountries: '母语国家',
             OtherCountries: '非母语国家',
-
             Male: '男',
             Female: '女',
-
             HoldWorkpermit: '已有工签',
             NewApplicant: '需要办理签证'
           }

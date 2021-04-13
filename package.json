@@ -10,7 +10,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "axios": "^0.21.0",
+    "axios": "^0.21.1",
     "element-china-area-data": "^5.0.2",
     "element-ui": "^2.14.1",
     "qrcodejs2": "0.0.2",
